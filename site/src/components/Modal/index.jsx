@@ -7,14 +7,15 @@ import CloseIcon from '../../assets/fechar.svg'
 import { useState } from "react"
 import Delete from "../Delete"
 import ToggleInput from "../ToggleInput"
+import axios from "axios"
 
 function Modal({ modalStage, product }) {
-    const [title, setTitle] = useState(product.title)
-    const [desc, setDesc] = useState(product.desc)
-    const [image, setImage] = useState(product.img)
-    const [pricePrazo, setPricePrazo] = useState(product.prazo)
-    const [priceVista, setPriceVista] = useState(product.vista)
-    const [quant, setQuant] = useState(product.quant)
+    const [title, setTitle] = useState(product.titulo)
+    const [desc, setDesc] = useState(product.descricao)
+    const [image, setImage] = useState(product.foto)
+    const [pricePrazo, setPricePrazo] = useState(product.precoPrazo)
+    const [priceVista, setPriceVista] = useState(product.precoVista)
+    const [quant, setQuant] = useState(product.estoque)
 
     const [openDelete, setOpenDelete] = useState(false);
     const [enablePriceAjust, setEnablePriceAjust] = useState()
@@ -43,6 +44,41 @@ function Modal({ modalStage, product }) {
         }
     }
 
+    async function validInputs() {
+        if(title !== "" && desc !== "" && pricePrazo !== "" && priceVista !== "" && quant >= 0 && quant !== "") {
+            const produtoNovo = {
+                titulo: title,
+                descricao: desc,
+                foto: image,
+                precoPrazo: pricePrazo,
+                precoVista: priceVista,
+                estoque: quant
+            }
+            postProduto(produtoNovo)
+            modalStage(false)
+            window.location.reload()
+        } 
+    }
+
+    async function postProduto(produto) {
+        try {
+            const conecta = await axios.post('http://localhost:5264/Novo', produto)
+            console.log("Resposta da API: ", conecta.data)
+        } catch (error) {
+            console.error("Erro ao enviar dados: ", error)
+        }
+    }
+
+    async function deleteProduto(id) {
+        try {
+            const conecta = await axios.delete(`http://localhost:5264/${id}`)
+            console.log("Resposta da API: ", conecta.data)
+            window.location.reload()
+        } catch (error) {
+            console.error("Erro ao deletar produto: ", error)
+        }
+    }
+
     return (
         <>
             <BlackScreen />  
@@ -56,13 +92,15 @@ function Modal({ modalStage, product }) {
                     title="Título" 
                     inputValue={title} 
                     handleType={(value) => setTitle(value)} 
-                    handleBlur={() => null} 
+                    handleBlur={() => null}
+                    error={title === ""? "Digite o nome do produto" : ""}
                 />
                 <ModalInput 
                     title="Descrição" 
                     inputValue={desc} 
                     handleType={(value) => setDesc(value)} 
-                    handleBlur={() => null} 
+                    handleBlur={() => null}
+                    error={desc === "" ? "Digite as características do produto" : ""}
                 />
                 <ModalInput 
                     title="Foto" 
@@ -73,21 +111,19 @@ function Modal({ modalStage, product }) {
                 <RowGap $distance='24px'>
                     <ModalInput 
                         type="number"
-                        step="0.01"
                         title="Preço à prazo" 
                         inputValue={pricePrazo} 
                         handleType={(value) => setPricePrazo(value)}
                         handleBlur={() => priceAjust('prazo')}
-                        error={pricePrazo <= 0 ? 'O preço não pode ser igual ou menor que 0' : ''}
+                        error={pricePrazo <= 0 ? 'Digite o preço à prazo' : ''}
                     />
                     <ModalInput 
                         type="number"
-                        step="0.01"
                         title="Preço à vista" 
                         inputValue={priceVista} 
                         handleType={(value) => setPriceVista(value)}
                         handleBlur={() => priceAjust('vista')}
-                        error={priceVista <= 0 ? 'O preço não pode ser igual ou menor que 0' : ''}
+                        error={priceVista <= 0 ? 'Digite o preço à vista' : ''}
                     />
                 </RowGap>
                 <ToggleInput 
@@ -99,7 +135,7 @@ function Modal({ modalStage, product }) {
                         inputValue={quant} 
                         handleType={(value) => setQuant(value)}
                         handleQuant={(alt) => changeQuant(alt)}
-                        error={quant < 0 ? "O estoque deve ser igual ou maior que 0" : ""}
+                        error={quant < 0 || quant === "" ? "O estoque deve ser igual ou maior que 0" : ""}
                     />
                     <RowGap $distance='16px'>
                         {product.title !== "" ? <Button bgcolor="red" title="Apagar" handleClick={() => setOpenDelete(true)} /> : null}
@@ -107,11 +143,17 @@ function Modal({ modalStage, product }) {
                         <Button 
                             title="Salvar" 
                             bgcolor="green" 
-                            handleClick={() => console.log(product)} />
+                            handleClick={() => validInputs()} />
                     </RowGap>
                 </ModalFooter>
             </ModalContainer>
-            {openDelete ? <Delete close={() => setOpenDelete(false)} removeProduct={() => console.log('removido')} /> : null}
+            {openDelete 
+                ? <Delete 
+                    close={() => setOpenDelete(false)} 
+                    removeProduct={() => deleteProduto(product.id)} 
+                /> 
+                : null
+            }
         </>
     )
 }

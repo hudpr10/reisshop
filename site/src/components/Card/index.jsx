@@ -5,14 +5,15 @@ import pencilIcon from '../../assets/lapis.svg'
 import RoundedButton from '../RoundedButton'
 import { CardContainer, LeftSide, RightSide } from './style'
 
-function Card({ title, desc, prazo, vista, quant, img, openModal}) {
+function Card({ id, title, desc, prazo, vista, quant, img, openModal}) {
     const [modalProduct] = useState({
-        title: title, 
-        desc: desc, 
-        img: img, 
-        prazo: prazo, 
-        vista: vista, 
-        quant: quant
+        id: id,
+        titulo: title, 
+        descricao: desc, 
+        foto: img, 
+        precoPrazo: prazo, 
+        precoVista: vista, 
+        estoque: quant
     })
 
     return (

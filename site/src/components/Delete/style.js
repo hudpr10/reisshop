@@ -10,7 +10,7 @@ const AreUSure = styled.div`
     width: 400px;
     border-radius: 8px;
     align-items: flex-end;
-    position: absolute;
+    position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);

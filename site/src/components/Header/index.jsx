@@ -7,12 +7,12 @@ import { HeaderContainer } from './style'
 
 function Header({ handleModal }) {
     const [modalProduct] = useState({
-        title: "", 
-        desc: "", 
-        img: "", 
-        prazo: "", 
-        vista: "", 
-        quant: 1
+        titulo: "", 
+        descricao: "", 
+        foto: "", 
+        precoPrazo: "", 
+        precoVista: "", 
+        estoque: 1
     })
 
     return (

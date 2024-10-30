@@ -12,6 +12,7 @@ function Input() {
         <Button 
             title="Buscar"
             largura="fixa"
+            handleClick={() => null}
         />
     </HeaderSearch>
     )
