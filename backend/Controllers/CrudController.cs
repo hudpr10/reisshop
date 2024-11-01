@@ -15,37 +15,49 @@ namespace backend.Controllers
             _context = context;
         }
 
-        [HttpPost("/{titulo}/{desc}/{foto}/{prazo}/{vista}/{estoque}")]
-        public IActionResult CreateURL(string titulo, string desc, string foto, decimal prazo, decimal vista, int estoque)
+        [HttpPost("/NovoProduto")]
+        public IActionResult CreateURL([FromBody] Produtos produtoNovo )
         {
-            Produtos novoProduto = new();
-            novoProduto.Titulo = titulo;
-            novoProduto.Descricao = desc;
-            novoProduto.Foto = foto;
-            novoProduto.PrecoPrazo = prazo;
-            novoProduto.PrecoVista = vista;
-            novoProduto.Estoque = estoque;
+            Produtos novoProduto = new()
+            {
+                Titulo = produtoNovo.Titulo,
+                Descricao = produtoNovo.Descricao,
+                Foto = produtoNovo.Foto,
+                PrecoPrazo = produtoNovo.PrecoPrazo,
+                PrecoVista = produtoNovo.PrecoVista,
+                Estoque = produtoNovo.Estoque,
+            };
 
             _context.Add(novoProduto);
             _context.SaveChanges();
             return Ok(novoProduto);
         }
 
-        [HttpGet("TodosDados")]
+        [HttpGet("/TodosProdutos")]
         public IActionResult GetAllData()
         {
             var retorno = _context.Produtos.Where(x => x.Id >= 0);
             return Ok(retorno);
         }
 
-        [HttpGet("{titulo}")]
-        public IActionResult GetTitleData(string titulo)
+        [HttpGet("/Produto")]
+        public IActionResult GetTitleData([FromQuery] string? titulo)
         {
-            var retorno = _context.Produtos.Where(x => x.Titulo.Contains(titulo));
+            IQueryable<Produtos> retorno;
+
+            if(string.IsNullOrEmpty(titulo))
+            {
+                retorno = _context.Produtos.Where(x => x.Id >= 0);
+            }
+            else 
+            {
+                retorno = _context.Produtos.Where(x => x.Titulo.Contains(titulo));
+            }
+            
             return Ok(retorno);
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("/ApagarProduto/{id}")]
         public IActionResult DeleteData(int id) 
         {
             var produto = _context.Produtos.Find(id);
@@ -61,18 +73,18 @@ namespace backend.Controllers
             } 
         }
 
-        [HttpPut("{id}")]
-        public IActionResult UpdateData(int id, string titulo, string desc, string foto, decimal prazo, decimal vista, int estoque)
+        [HttpPatch("/AtualizarProduto")]
+        public IActionResult UpdateData([FromBody] Produtos produtoAtualizado)
         {
-            var produto = _context.Produtos.Find(id);
+            var produto = _context.Produtos.Find(produtoAtualizado.Id);
 
             if(produto != null) {
-                produto.Titulo = titulo;
-                produto.Descricao = desc;
-                produto.Foto = foto;
-                produto.PrecoPrazo = prazo;
-                produto.PrecoVista = vista;
-                produto.Estoque = estoque;
+                produto.Titulo = produtoAtualizado.Titulo;
+                produto.Descricao = produtoAtualizado.Descricao;
+                produto.Foto = produtoAtualizado.Foto;
+                produto.PrecoPrazo = produtoAtualizado.PrecoPrazo;
+                produto.PrecoVista = produtoAtualizado.PrecoVista;
+                produto.Estoque = produtoAtualizado.Estoque;
 
                 _context.Produtos.Update(produto);
                 _context.SaveChanges();

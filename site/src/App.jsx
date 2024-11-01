@@ -18,7 +18,7 @@ function App() {
 
   useEffect(() => {
     async function apiConecta() {
-      const conecta = await axios.get('http://localhost:5264/TodosDados')
+      const conecta = await axios.get('http://localhost:5264/TodosProdutos')
       setDadosApi(conecta.data)
     }
 
@@ -27,7 +27,10 @@ function App() {
 
   return (
     <>
-      <Header handleModal={(product) => handleOpen(product)} />
+      <Header 
+        handleModal={(product) => handleOpen(product)}
+        produtosNaTela={setDadosApi}
+      />
       <MainContainer>
         {dadosApi.map(cadaItem => {
           return <Card

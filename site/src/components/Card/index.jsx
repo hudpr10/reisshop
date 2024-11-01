@@ -19,7 +19,7 @@ function Card({ id, title, desc, prazo, vista, quant, img, openModal}) {
     return (
         <CardContainer>
             <LeftSide>
-                <img src={img === '' ? erroImage : img } alt='Imagem do Produto' />
+                <img src={img === '' ? erroImage : img} alt='Imagem do Produto' />
                 <div>
                     <h2>{title}</h2>
                     <p>{desc}</p>

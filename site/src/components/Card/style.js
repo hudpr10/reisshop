@@ -6,7 +6,6 @@ const CardContainer = styled.div`
     background-color: var(--white);
     border-radius: 8px;
     padding: 16px;
-
 `
 
 const LeftSide = styled.div`

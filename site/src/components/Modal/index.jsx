@@ -44,9 +44,9 @@ function Modal({ modalStage, product }) {
         }
     }
 
-    async function validInputs() {
+    async function validInputs(buttonName) {
         if(title !== "" && desc !== "" && pricePrazo !== "" && priceVista !== "" && quant >= 0 && quant !== "") {
-            const produtoNovo = {
+            let produtoNovo = {
                 titulo: title,
                 descricao: desc,
                 foto: image,
@@ -54,25 +54,40 @@ function Modal({ modalStage, product }) {
                 precoVista: priceVista,
                 estoque: quant
             }
-            postProduto(produtoNovo)
-            modalStage(false)
-            window.location.reload()
+
+            if(buttonName === 'Adicionar') {
+                postProduto(produtoNovo)
+            } else if(buttonName === 'Salvar') {
+                produtoNovo = {
+                    ...produtoNovo,
+                    id: product.id
+                }
+                patchProduto(produtoNovo)
+            }
         } 
     }
 
     async function postProduto(produto) {
         try {
-            const conecta = await axios.post('http://localhost:5264/Novo', produto)
-            console.log("Resposta da API: ", conecta.data)
+            await axios.post('http://localhost:5264/NovoProduto', produto)
+            window.location.reload()
         } catch (error) {
             console.error("Erro ao enviar dados: ", error)
         }
     }
 
+    async function patchProduto(produto) {
+        try {
+            await axios.patch('http://localhost:5264/AtualizarProduto', produto)
+            window.location.reload()
+        } catch (error) {
+            console.error("Erro ao editar: ", error)
+        }
+    }
+
     async function deleteProduto(id) {
         try {
-            const conecta = await axios.delete(`http://localhost:5264/${id}`)
-            console.log("Resposta da API: ", conecta.data)
+            await axios.delete(`http://localhost:5264/ApagarProduto/${id}`)
             window.location.reload()
         } catch (error) {
             console.error("Erro ao deletar produto: ", error)
@@ -138,12 +153,12 @@ function Modal({ modalStage, product }) {
                         error={quant < 0 || quant === "" ? "O estoque deve ser igual ou maior que 0" : ""}
                     />
                     <RowGap $distance='16px'>
-                        {product.title !== "" ? <Button bgcolor="red" title="Apagar" handleClick={() => setOpenDelete(true)} /> : null}
+                        {product.titulo !== "" ? <Button bgcolor="red" title="Apagar" handleClick={() => setOpenDelete(true)} /> : null}
                         <Button title="Cancelar" handleClick={() => modalStage(false)} />
-                        <Button 
-                            title="Salvar" 
-                            bgcolor="green" 
-                            handleClick={() => validInputs()} />
+                        {product.titulo === "" 
+                            ? <Button title="Adicionar" bgcolor="green" handleClick={() => validInputs('Adicionar')} /> 
+                            : <Button title="Salvar" bgcolor="green" handleClick={() => validInputs('Salvar')} />
+                        }
                     </RowGap>
                 </ModalFooter>
             </ModalContainer>
