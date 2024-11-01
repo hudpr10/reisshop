@@ -38,7 +38,7 @@ function App() {
             id={cadaItem.id}
             title={cadaItem.titulo}
             desc={cadaItem.descricao}
-            img={cadaItem.foto === "na" ? "" : cadaItem.foto}
+            img={cadaItem.foto}
             quant={cadaItem.estoque}
             prazo={cadaItem.precoPrazo}
             vista={cadaItem.precoVista}

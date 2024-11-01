@@ -121,7 +121,7 @@ function Modal({ modalStage, product }) {
                     title="Foto" 
                     inputValue={image} 
                     handleType={(value) => setImage(value)} 
-                    handleBlur={() => null} 
+                    handleBlur={() => null}
                 />
                 <RowGap $distance='24px'>
                     <ModalInput 
