@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import Header from './components/Header'
 import Modal from './components/Modal'
-import { MainContainer } from './globalStyles'
+import { MainContainer, ErrorText } from './globalStyles'
 import Card from './components/Card'
 import axios from 'axios'
 
@@ -45,6 +45,7 @@ function App() {
             openModal={(product) => handleOpen(product)}
           />
         })}
+        {dadosApi.length === 0 ? <ErrorText>Não foi encontrado nenhum produto!</ErrorText> : null}
         {modalOpen ? <Modal modalStage={setModalOpen} product={modalProduct} /> : null}
       </MainContainer>
     </>

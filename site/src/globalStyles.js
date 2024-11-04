@@ -35,7 +35,14 @@ const MainContainer = styled.main`
     margin: 72px 0 32px 0;
 `
 
+const ErrorText = styled.h3`
+    color: var(--gray);
+    text-align: center;
+    margin-top: 40px;
+`
+
 export {
     MainStyled,
-    MainContainer
+    MainContainer,
+    ErrorText
 }
