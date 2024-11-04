@@ -17,6 +17,7 @@ const LeftSide = styled.div`
         width: 100px;
         height: 100px;
         border-radius: 4px;
+        object-fit: contain;
     }
 
     div {
