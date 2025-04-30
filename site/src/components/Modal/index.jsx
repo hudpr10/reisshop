@@ -8,6 +8,7 @@ import Delete from "../Delete"
 import ToggleInput from "../ToggleInput"
 import CloseButton from "../CloseButton"
 import axios from "axios"
+import { motion } from "framer-motion";
 
 function Modal({ modalStage, product }) {
     const [title, setTitle] = useState(product.titulo)
@@ -96,76 +97,83 @@ function Modal({ modalStage, product }) {
 
     return (
         <>
-            <BlackScreen />  
-            <ModalContainer>
-                <CloseButton handleClick={() => modalStage(false)} />
+            <BlackScreen /> 
+            <motion.div
+                style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -60%)' }}
+                initial={{ opacity: 0, x: 0 }}
+                animate={{ opacity: 1, x: 0}}
+                transition={{ duration: 0.3, ease: "easeOut" }}
+            >
+                <ModalContainer>
+                    <CloseButton handleClick={() => modalStage(false)} />
 
-                <ModalInput 
-                    title="Título" 
-                    inputValue={title} 
-                    handleType={(value) => setTitle(value)} 
-                    handleBlur={() => null}
-                    error={title === ""? "Digite o nome do produto" : ""}
-                />
-                <ModalInput 
-                    title="Descrição" 
-                    inputValue={desc} 
-                    handleType={(value) => setDesc(value)} 
-                    handleBlur={() => null}
-                    error={desc === "" ? "Digite as características do produto" : ""}
-                />
-                <ModalInput 
-                    title="Foto" 
-                    inputValue={image} 
-                    handleType={(value) => setImage(value)} 
-                    handleBlur={() => null}
-                />
-                <RowGap $distance='24px'>
                     <ModalInput 
-                        type="number"
-                        title="Preço à prazo" 
-                        inputValue={pricePrazo} 
-                        handleType={(value) => setPricePrazo(value)}
-                        handleBlur={() => priceAjust('prazo')}
-                        error={pricePrazo <= 0 ? 'Digite o preço à prazo' : ''}
+                        title="Título" 
+                        inputValue={title} 
+                        handleType={(value) => setTitle(value)} 
+                        handleBlur={() => null}
+                        error={title === ""? "Digite o nome do produto" : ""}
                     />
                     <ModalInput 
-                        type="number"
-                        title="Preço à vista" 
-                        inputValue={priceVista} 
-                        handleType={(value) => setPriceVista(value)}
-                        handleBlur={() => priceAjust('vista')}
-                        error={priceVista <= 0 ? 'Digite o preço à vista' : ''}
+                        title="Descrição" 
+                        inputValue={desc} 
+                        handleType={(value) => setDesc(value)} 
+                        handleBlur={() => null}
+                        error={desc === "" ? "Digite as características do produto" : ""}
                     />
-                </RowGap>
-                <ToggleInput 
-                    title="Ajustar preços automaticamente" 
-                    handleClick={(enable) => setEnablePriceAjust(enable)}
-                />
-                <ModalFooter>
-                    <ModalQuantity 
-                        inputValue={quant} 
-                        handleType={(value) => setQuant(value)}
-                        handleQuant={(alt) => changeQuant(alt)}
-                        error={quant < 0 || quant === "" ? "O estoque deve ser igual ou maior que 0" : ""}
+                    <ModalInput 
+                        title="Foto" 
+                        inputValue={image} 
+                        handleType={(value) => setImage(value)} 
+                        handleBlur={() => null}
                     />
-                    <RowGap $distance='16px'>
-                        {product.titulo !== "" ? <Button bgcolor="red" title="Apagar" handleClick={() => setOpenDelete(true)} /> : null}
-                        <Button title="Cancelar" handleClick={() => modalStage(false)} />
-                        {product.titulo === "" 
-                            ? <Button title="Adicionar" bgcolor="green" handleClick={() => validInputs('Adicionar')} /> 
-                            : <Button title="Salvar" bgcolor="green" handleClick={() => validInputs('Salvar')} />
-                        }
+                    <RowGap $distance='24px'>
+                        <ModalInput 
+                            type="number"
+                            title="Preço à prazo" 
+                            inputValue={pricePrazo} 
+                            handleType={(value) => setPricePrazo(value)}
+                            handleBlur={() => priceAjust('prazo')}
+                            error={pricePrazo <= 0 ? 'Digite o preço à prazo' : ''}
+                        />
+                        <ModalInput 
+                            type="number"
+                            title="Preço à vista" 
+                            inputValue={priceVista} 
+                            handleType={(value) => setPriceVista(value)}
+                            handleBlur={() => priceAjust('vista')}
+                            error={priceVista <= 0 ? 'Digite o preço à vista' : ''}
+                        />
                     </RowGap>
-                </ModalFooter>
-            </ModalContainer>
-            {openDelete 
-                ? <Delete 
-                    close={() => setOpenDelete(false)} 
-                    removeProduct={() => deleteProduto(product.id)} 
-                /> 
-                : null
-            }
+                    <ToggleInput 
+                        title="Ajustar preços automaticamente" 
+                        handleClick={(enable) => setEnablePriceAjust(enable)}
+                    />
+                    <ModalFooter>
+                        <ModalQuantity 
+                            inputValue={quant} 
+                            handleType={(value) => setQuant(value)}
+                            handleQuant={(alt) => changeQuant(alt)}
+                            error={quant < 0 || quant === "" ? "O estoque deve ser igual ou maior que 0" : ""}
+                        />
+                        <RowGap $distance='16px'>
+                            {product.titulo !== "" ? <Button bgcolor="red" title="Apagar" handleClick={() => setOpenDelete(true)} /> : null}
+                            <Button title="Cancelar" handleClick={() => modalStage(false)} />
+                            {product.titulo === "" 
+                                ? <Button title="Adicionar" bgcolor="green" handleClick={() => validInputs('Adicionar')} /> 
+                                : <Button title="Salvar" bgcolor="green" handleClick={() => validInputs('Salvar')} />
+                            }
+                        </RowGap>
+                    </ModalFooter>
+                </ModalContainer>
+                {openDelete 
+                    ? <Delete 
+                        close={() => setOpenDelete(false)} 
+                        removeProduct={() => deleteProduto(product.id)} 
+                    /> 
+                    : null
+                }
+            </motion.div>
         </>
     )
 }

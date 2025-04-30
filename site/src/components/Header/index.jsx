@@ -7,7 +7,7 @@ import HeaderInput from '../HeaderInput'
 import RoundedButton from "../RoundedButton"
 import { HeaderContainer, ButtonsContainerStyled } from './style'
 
-function Header({ handleModal, produtosNaTela }) {
+function Header({ handleModal, produtosNaTela, handleAsideBag }) {
     const [modalProduct] = useState({
         titulo: "", 
         descricao: "", 
@@ -30,10 +30,9 @@ function Header({ handleModal, produtosNaTela }) {
                     handleClick={() => handleModal(modalProduct)}
                 />
                 <RoundedButton
-                    title="Carrinho"
                     icon={bagIcon}
                     bgcolor="white-text"
-                    handleClick={() => handleModal(modalProduct)}
+                    handleClick={() => handleAsideBag(modalProduct)}
                 />
             </ButtonsContainerStyled>
         </HeaderContainer>

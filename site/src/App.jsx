@@ -4,6 +4,7 @@ import Modal from './components/Modal'
 import { MainContainer, ErrorText } from './globalStyles'
 import Card from './components/Card'
 import axios from 'axios'
+import AsideBag from './components/AsideBag'
 
 function App() {
   // Modal
@@ -15,7 +16,8 @@ function App() {
     setModalProduct(product)
   }
 
-  
+  // AsideBag
+  const [asideBagOpen, setAsideBagOpen] = useState(false);
 
   // Api
   const [dadosApi, setDadosApi] = useState([])
@@ -32,6 +34,7 @@ function App() {
     <>
       <Header 
         handleModal={(product) => handleOpenModal(product)}
+        handleAsideBag={() => setAsideBagOpen(true)}
         produtosNaTela={setDadosApi}
       />
       <MainContainer>
@@ -50,6 +53,7 @@ function App() {
         })}
         {dadosApi.length === 0 ? <ErrorText>Não foi encontrado nenhum produto!</ErrorText> : null}
         {modalOpen ? <Modal modalStage={setModalOpen} product={modalProduct} /> : null}
+        {asideBagOpen ? <AsideBag asideBagStage={setAsideBagOpen} /> : null}
       </MainContainer>
     </>
   )

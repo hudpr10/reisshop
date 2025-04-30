@@ -45,11 +45,11 @@ function Card({ id, title, desc, prazo, vista, quant, img, openModal}) {
                     </li>
                     <li>
                         <h3>à prazo</h3>
-                        <span>R$ {prazo}</span>
+                        <span>R$ {prazo.toFixed(2)}</span>
                     </li>
                     <li>
                         <h3>à vista</h3>
-                        <span>R$ {vista}</span>
+                        <span>R$ {prazo.toFixed(2)}</span>
                     </li>
                 </ul>
             </RightSide>
