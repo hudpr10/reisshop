@@ -1,15 +1,5 @@
 import styled from "styled-components";
 
-const BlackScreen = styled.div`
-    background-color: black;
-    position: fixed;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    opacity: 0.4;
-`
-
 const ModalContainer = styled.div`
     background-color: var(--light-gray);
     display: flex;
@@ -35,7 +25,6 @@ const ModalFooter = styled.div`
 `
 
 export {
-    BlackScreen,
     ModalContainer,
     RowGap,
     ModalFooter

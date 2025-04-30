@@ -1,9 +1,10 @@
 /* eslint-disable react/prop-types */
 import closeIcon from '../../assets/fechar.svg'
-import { BlackScreen } from '../Modal/style';
+import BlackScreen from '../BlackScreen';
 import RoundedButton from '../RoundedButton';
 import { AsideBagStyled, AsideHeaderStyled } from "./style";
 import { motion } from "framer-motion";
+
 
 function AsideBag({ asideBagStage }) {
     return (

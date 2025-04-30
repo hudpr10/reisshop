@@ -2,13 +2,14 @@
 import Button from "../Button"
 import ModalInput from "../ModalInput"
 import ModalQuantity from "../ModalQuantity"
-import { BlackScreen, ModalContainer, RowGap, ModalFooter } from "./style"
+import { ModalContainer, RowGap, ModalFooter } from "./style"
 import { useState } from "react"
 import Delete from "../Delete"
 import ToggleInput from "../ToggleInput"
 import CloseButton from "../CloseButton"
 import axios from "axios"
 import { motion } from "framer-motion";
+import BlackScreen from "../BlackScreen"
 
 function Modal({ modalStage, product }) {
     const [title, setTitle] = useState(product.titulo)
@@ -97,7 +98,7 @@ function Modal({ modalStage, product }) {
 
     return (
         <>
-            <BlackScreen /> 
+            <BlackScreen />
             <motion.div
                 style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -60%)' }}
                 initial={{ opacity: 0, x: 0 }}
