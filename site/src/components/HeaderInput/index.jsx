@@ -5,7 +5,7 @@ import Button from '../Button'
 import { InputContainer, HeaderSearch } from './style'
 import axios from 'axios'
 
-function Input({ produtosNaTela }) {
+function HeaderInput({ produtosNaTela }) {
     const [inputValue, setInputValue] = useState("")
 
     async function getNomeProduto(nomeProduto) {
@@ -25,24 +25,24 @@ function Input({ produtosNaTela }) {
     }
 
     return (
-    <HeaderSearch>
-        <InputContainer>
-            <img src={searchIcon} alt="Icone de Busca" />
-            <input 
-                type="text" 
-                placeholder='Pesquisar...'
-                value={inputValue}
-                onKeyDown={(e) => enterFilter(e)}
-                onChange={(e) => setInputValue(e.target.value)}
+        <HeaderSearch>
+            <InputContainer>
+                <img src={searchIcon} alt="Icone de Busca" />
+                <input 
+                    type="text" 
+                    placeholder='Pesquisar...'
+                    value={inputValue}
+                    onKeyDown={(e) => enterFilter(e)}
+                    onChange={(e) => setInputValue(e.target.value)}
+                />
+            </InputContainer>
+            <Button 
+                title="Buscar"
+                largura="fixa"
+                handleClick={() => getNomeProduto(inputValue)}
             />
-        </InputContainer>
-        <Button 
-            title="Buscar"
-            largura="fixa"
-            handleClick={() => getNomeProduto(inputValue)}
-        />
-    </HeaderSearch>
+        </HeaderSearch>
     )
 }
 
-export default Input
+export default HeaderInput;

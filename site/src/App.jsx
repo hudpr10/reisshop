@@ -6,16 +6,19 @@ import Card from './components/Card'
 import axios from 'axios'
 
 function App() {
+  // Modal
   const [modalOpen, setModalOpen] = useState(false)
   const [modalProduct, setModalProduct] = useState({})
 
-  function handleOpen(product) {
+  function handleOpenModal(product) {
     setModalOpen(true)
     setModalProduct(product)
   }
 
-  const [dadosApi, setDadosApi] = useState([])
+  
 
+  // Api
+  const [dadosApi, setDadosApi] = useState([])
   useEffect(() => {
     async function apiConecta() {
       const conecta = await axios.get('http://localhost:5264/TodosProdutos')
@@ -28,7 +31,7 @@ function App() {
   return (
     <>
       <Header 
-        handleModal={(product) => handleOpen(product)}
+        handleModal={(product) => handleOpenModal(product)}
         produtosNaTela={setDadosApi}
       />
       <MainContainer>
@@ -42,7 +45,7 @@ function App() {
             quant={cadaItem.estoque}
             prazo={cadaItem.precoPrazo}
             vista={cadaItem.precoVista}
-            openModal={(product) => handleOpen(product)}
+            openModal={(product) => handleOpenModal(product)}
           />
         })}
         {dadosApi.length === 0 ? <ErrorText>Não foi encontrado nenhum produto!</ErrorText> : null}

@@ -1,9 +1,11 @@
 /* eslint-disable react/prop-types */
 import { useState } from 'react'
 import logo from '../../assets/logo.png'
+import bagIcon from '../../assets/bag.svg'
 import Button from '../Button'
-import Input from '../Input'
-import { HeaderContainer } from './style'
+import HeaderInput from '../HeaderInput'
+import RoundedButton from "../RoundedButton"
+import { HeaderContainer, ButtonsContainerStyled } from './style'
 
 function Header({ handleModal, produtosNaTela }) {
     const [modalProduct] = useState({
@@ -18,13 +20,22 @@ function Header({ handleModal, produtosNaTela }) {
     return (
         <HeaderContainer>
             <img src={logo} alt="Logo ReisShop" />
-            <Input produtosNaTela={produtosNaTela} />
-            <Button
-                title="Adicionar Produto"
-                icon="true"
-                bgcolor="green"
-                handleClick={() => handleModal(modalProduct)}
-            />
+            <HeaderInput produtosNaTela={produtosNaTela} />
+
+            <ButtonsContainerStyled>
+                <Button
+                    title="Adicionar Produto"
+                    icon="true"
+                    bgcolor="green"
+                    handleClick={() => handleModal(modalProduct)}
+                />
+                <RoundedButton
+                    title="Carrinho"
+                    icon={bagIcon}
+                    bgcolor="white-text"
+                    handleClick={() => handleModal(modalProduct)}
+                />
+            </ButtonsContainerStyled>
         </HeaderContainer>
     )
 }

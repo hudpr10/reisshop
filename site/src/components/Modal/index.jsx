@@ -2,11 +2,11 @@
 import Button from "../Button"
 import ModalInput from "../ModalInput"
 import ModalQuantity from "../ModalQuantity"
-import { BlackScreen, CloseButton, ModalContainer, RowGap, ModalFooter } from "./style"
-import CloseIcon from '../../assets/fechar.svg'
+import { BlackScreen, ModalContainer, RowGap, ModalFooter } from "./style"
 import { useState } from "react"
 import Delete from "../Delete"
 import ToggleInput from "../ToggleInput"
+import CloseButton from "../CloseButton"
 import axios from "axios"
 
 function Modal({ modalStage, product }) {
@@ -98,11 +98,8 @@ function Modal({ modalStage, product }) {
         <>
             <BlackScreen />  
             <ModalContainer>
-                <CloseButton 
-                    onClick={() => modalStage(false)}
-                >
-                    <img src={CloseIcon} alt="Fechar" />
-                </CloseButton>
+                <CloseButton handleClick={() => modalStage(false)} />
+
                 <ModalInput 
                     title="Título" 
                     inputValue={title} 

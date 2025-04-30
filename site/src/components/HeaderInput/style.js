@@ -1,5 +1,16 @@
 import styled from "styled-components";
 
+const HeaderSearch = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+`
+
 const InputContainer = styled.div`
     background-color: var(--white);
     width: 416px;
@@ -32,14 +43,7 @@ const InputContainer = styled.div`
     }
 `
 
-const HeaderSearch = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 16px;
-`
-
 export {
-    InputContainer,
-    HeaderSearch
+    HeaderSearch,
+    InputContainer
 }

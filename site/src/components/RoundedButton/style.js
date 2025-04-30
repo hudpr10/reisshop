@@ -1,8 +1,6 @@
 import styled from "styled-components"
 
 const Button = styled.div`
-    width: 32px;
-    height: 32px;
     cursor: pointer;
     background-color: var(--white-text);
     display: flex;
@@ -32,6 +30,11 @@ const Button = styled.div`
     }}
 `
 
+const ImgStyled = styled.img`
+    padding: 8px;
+`
+
 export {
-    Button
+    Button,
+    ImgStyled
 }

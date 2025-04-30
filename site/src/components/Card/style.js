@@ -73,8 +73,14 @@ const RightSide = styled.div`
     }
 `
 
+const RoundedButtonsContainerStyled = styled.div`
+    display: flex;
+    gap: 16px;
+`
+
 export {
     CardContainer,
     LeftSide,
-    RightSide
+    RightSide,
+    RoundedButtonsContainerStyled
 }

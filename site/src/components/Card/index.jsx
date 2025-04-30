@@ -2,8 +2,9 @@
 import { useState } from 'react'
 import erroImage from '../../assets/erro.png'
 import pencilIcon from '../../assets/lapis.svg'
+import addIcon from '../../assets/maisMenor.svg'
 import RoundedButton from '../RoundedButton'
-import { CardContainer, LeftSide, RightSide } from './style'
+import { CardContainer, LeftSide, RightSide, RoundedButtonsContainerStyled } from './style'
 
 function Card({ id, title, desc, prazo, vista, quant, img, openModal}) {
     const [modalProduct] = useState({
@@ -26,9 +27,17 @@ function Card({ id, title, desc, prazo, vista, quant, img, openModal}) {
                 </div>
             </LeftSide>
             <RightSide>
-                <div>
-                    <RoundedButton icon={pencilIcon} bgcolor="white-text" handleClick={() => openModal(modalProduct)} />
-                </div>
+                <RoundedButtonsContainerStyled>
+                    <RoundedButton 
+                        icon={pencilIcon} 
+                        bgcolor="white-text" 
+                        handleClick={() => openModal(modalProduct)} 
+                    />
+                    <RoundedButton 
+                        icon={addIcon} 
+                        bgcolor="green" 
+                    />
+                </RoundedButtonsContainerStyled>
                 <ul>
                     <li>
                         <h3>estoque</h3>
