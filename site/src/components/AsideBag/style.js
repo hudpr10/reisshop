@@ -24,7 +24,7 @@ const AsideHeaderStyled = styled.header`
 const ToggleInputContainerStyled = styled.div`
     margin: 8px 0 24px 0;
     width: min-content;
-    text-wrap: nowrap;
+    white-space: nowrap;
 
     label {
         font-size: 0.875rem;

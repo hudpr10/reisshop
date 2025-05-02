@@ -66,7 +66,7 @@ const ButtonContainer = styled.button`
 
     span {
         font-size: 1rem;
-        text-wrap: nowrap;
+        white-space: nowrap;
         width: 100%;
         font-weight: 400;
     }

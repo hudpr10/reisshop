@@ -20,6 +20,7 @@ function CardInBag({ id, title, price, img, defaultQuantity, asideBagList, setAs
                 }
             }
         }  
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [quantity])
 
     return (

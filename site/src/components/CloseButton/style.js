@@ -9,9 +9,6 @@ const CloseButtonStyled = styled.button`
     width: min-content;
     border-radius: 50%;
     padding: 4px;
-    /* position: absolute;
-    top: 8px;
-    right: 8px; */
     cursor: pointer;
 
     ${({ $position }) => {
