@@ -3,11 +3,11 @@ import BlackScreen from '../BlackScreen';
 import CardInBag from '../CardInBag';
 import CloseButton from '../CloseButton';
 import ToggleInput from '../ToggleInput';
-import { AsideBagStyled, AsideHeaderStyled, ToggleInputContainerStyled } from "./style";
+import { AsideBagStyled, AsideHeaderStyled, ToggleInputContainerStyled, CardInBagContainerStyled, EmptyMsg } from "./style";
 import { motion } from "framer-motion";
-import errorPng from "../../assets/erro.png";
+// import errorPng from "../../assets/erro.png";
 
-function AsideBag({ asideBagStage }) {
+function AsideBag({ asideBagStage, asideBagList, setAsideBagList }) {
     return (
         <>
             <BlackScreen />
@@ -29,12 +29,22 @@ function AsideBag({ asideBagStage }) {
                         <ToggleInput title="Preço à vista" />
                     </ToggleInputContainerStyled>
 
-                    <CardInBag 
-                        title={"Produto 1"}
-                        price={100}
-                        img={errorPng}
-                        defaultQuantity={1}
-                    />
+                    <CardInBagContainerStyled>
+                        {asideBagList.length === 0 ? <EmptyMsg>A sacola está vazia!</EmptyMsg> : null}
+                        {asideBagList.map((product => {
+                            return <CardInBag 
+                                key={product.id}
+                                id={product.id}
+                                title={product.titulo}
+                                price={product.precoVista}
+                                img={product.foto}
+                                defaultQuantity={product.quantidadeInBag}
+
+                                asideBagList={asideBagList}
+                                setAsideBagList={setAsideBagList}
+                            />
+                        }))}
+                    </CardInBagContainerStyled>
 
                 </AsideBagStyled>
             </motion.div>

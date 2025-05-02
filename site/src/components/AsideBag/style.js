@@ -32,8 +32,23 @@ const ToggleInputContainerStyled = styled.div`
     }
 `
 
+const CardInBagContainerStyled = styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+`
+
+const EmptyMsg = styled.p`
+    font-size: 1rem;
+    font-weight: 700;
+    text-align: center;
+    color: var(--gray);
+`
+
 export {
     AsideBagStyled,
     AsideHeaderStyled,
-    ToggleInputContainerStyled
+    ToggleInputContainerStyled,
+    CardInBagContainerStyled,
+    EmptyMsg
 }

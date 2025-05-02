@@ -17,7 +17,8 @@ function App() {
   }
 
   // AsideBag
-  const [asideBagOpen, setAsideBagOpen] = useState(false);
+  const [asideBagOpen, setAsideBagOpen] = useState(false)
+  const [asideBagList, setAsideBagList] = useState([])
 
   // Api
   const [dadosApi, setDadosApi] = useState([])
@@ -48,12 +49,16 @@ function App() {
             quant={cadaItem.estoque}
             prazo={cadaItem.precoPrazo}
             vista={cadaItem.precoVista}
+
+            asideBagList={asideBagList}
+            setAsideBagList={setAsideBagList}
+
             openModal={(product) => handleOpenModal(product)}
           />
         })}
         {dadosApi.length === 0 ? <ErrorText>Não foi encontrado nenhum produto!</ErrorText> : null}
         {modalOpen ? <Modal modalStage={setModalOpen} product={modalProduct} /> : null}
-        {asideBagOpen ? <AsideBag asideBagStage={setAsideBagOpen} /> : null}
+        {asideBagOpen ? <AsideBag asideBagStage={setAsideBagOpen} asideBagList={asideBagList} setAsideBagList={setAsideBagList} /> : null}
       </MainContainer>
     </>
   )

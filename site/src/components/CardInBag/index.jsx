@@ -1,15 +1,31 @@
 /* eslint-disable react/prop-types */
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import QuantityComponent from '../QuantityComponent';
 import { CardInBagStyled, ImgContainer, TextContainer, QuantityContainer } from './style';
+import erroImage from '../../assets/erro.png';
 
-function CardInBag({ title, price, img, defaultQuantity}) {
+function CardInBag({ id, title, price, img, defaultQuantity, asideBagList, setAsideBagList }) {
     const [quantity, setQuantity] = useState(defaultQuantity);
+    const [productToUpdate] = useState(asideBagList.find((item) => item.id === id))
+
+    useEffect(() => {
+        productToUpdate.quantidadeInBag = quantity
+        setAsideBagList([...asideBagList])
+
+        if(quantity === 0) {
+            for(let i = 0; i < asideBagList.length; i++) {
+                if(asideBagList[i].quantidadeInBag === 0) {
+                    asideBagList.splice(i, 1)
+                    setAsideBagList([...asideBagList])
+                }
+            }
+        }  
+    }, [quantity])
 
     return (
         <CardInBagStyled>
             <ImgContainer>
-                <img src={img} alt={title} />
+                <img src={img === "" ? erroImage : img} alt={title} />
             </ImgContainer>
 
             <TextContainer>

@@ -6,16 +6,33 @@ import addIcon from '../../assets/mais.svg'
 import RoundedButton from '../RoundedButton'
 import { CardContainer, LeftSide, RightSide, RoundedButtonsContainerStyled } from './style'
 
-function Card({ id, title, desc, prazo, vista, quant, img, openModal}) {
-    const [modalProduct] = useState({
+function Card({ id, title, desc, prazo, vista, quant, img, openModal, setAsideBagList, asideBagList }) {
+    const [productObject, setProductObject] = useState({
         id: id,
         titulo: title, 
         descricao: desc, 
         foto: img, 
         precoPrazo: prazo, 
         precoVista: vista, 
-        estoque: quant
+        estoque: quant,
+        quantidadeInBag: 1
     })
+
+    function addOnList() {
+        const productInBag = asideBagList.find((item) => item.id === id)
+        
+        if(productInBag === undefined) {
+            productObject.quantidadeInBag = 1
+            setProductObject(productObject)
+
+            setAsideBagList([...asideBagList, productObject])
+        } else {
+            productInBag.quantidadeInBag += 1
+            
+            setProductObject(productInBag)
+            setAsideBagList([...asideBagList])
+        }
+    }
 
     return (
         <CardContainer>
@@ -31,11 +48,12 @@ function Card({ id, title, desc, prazo, vista, quant, img, openModal}) {
                     <RoundedButton 
                         icon={pencilIcon} 
                         bgcolor="white-text" 
-                        handleClick={() => openModal(modalProduct)} 
+                        handleClick={() => openModal(productObject)} 
                     />
                     <RoundedButton
                         icon={addIcon} 
-                        bgcolor="green" 
+                        bgcolor="green"
+                        handleClick={() => addOnList()}
                     />
                 </RoundedButtonsContainerStyled>
                 <ul>
