@@ -35,8 +35,9 @@ const InputContainer = styled.div`
         height: 20px;
         background-color: var(--red);
         border-radius: 50px;
-        position: absolute;
         transition: 200ms;
+
+        position: absolute;
         left: 20px;
     }
 

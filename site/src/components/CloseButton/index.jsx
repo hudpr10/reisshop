@@ -2,9 +2,9 @@
 import { CloseButtonStyled } from "./style";
 import closeIcon from '../../assets/fechar.svg'
 
-function CloseButton({ handleClick }) {
+function CloseButton({ handleClick, position }) {
     return (
-        <CloseButtonStyled onClick={() => handleClick()}> 
+        <CloseButtonStyled onClick={() => handleClick()} $position={position}> 
             <img src={closeIcon} alt="Fechar" />
         </CloseButtonStyled>
     )

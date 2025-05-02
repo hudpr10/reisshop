@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import addIcon from '../../assets/mais.svg'
+import addIcon from '../../assets/mais-big.svg'
 import { ButtonContainer } from './style'
 
 function Button({ title, largura, bgcolor, handleClick, icon }) {

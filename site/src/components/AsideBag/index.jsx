@@ -1,10 +1,11 @@
 /* eslint-disable react/prop-types */
-import closeIcon from '../../assets/fechar.svg'
 import BlackScreen from '../BlackScreen';
-import RoundedButton from '../RoundedButton';
-import { AsideBagStyled, AsideHeaderStyled } from "./style";
+import CardInBag from '../CardInBag';
+import CloseButton from '../CloseButton';
+import ToggleInput from '../ToggleInput';
+import { AsideBagStyled, AsideHeaderStyled, ToggleInputContainerStyled } from "./style";
 import { motion } from "framer-motion";
-
+import errorPng from "../../assets/erro.png";
 
 function AsideBag({ asideBagStage }) {
     return (
@@ -19,13 +20,23 @@ function AsideBag({ asideBagStage }) {
                 <AsideBagStyled>
                     <AsideHeaderStyled>
                         <span>Sacola de Produtos</span>
-                        <RoundedButton 
-                            icon={closeIcon}
-                            bgcolor={""}
+                        <CloseButton 
                             handleClick={() => asideBagStage(false)}
                         />
                     </AsideHeaderStyled>
-                </AsideBagStyled>        
+
+                    <ToggleInputContainerStyled>
+                        <ToggleInput title="Preço à vista" />
+                    </ToggleInputContainerStyled>
+
+                    <CardInBag 
+                        title={"Produto 1"}
+                        price={100}
+                        img={errorPng}
+                        defaultQuantity={1}
+                    />
+
+                </AsideBagStyled>
             </motion.div>
         </>
     )

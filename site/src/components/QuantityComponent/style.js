@@ -18,14 +18,27 @@ const QuantityContainer = styled.div`
     font-size: 0.875rem;
     background-color: var(--white);
     border-radius: 24px;
-    width: min-content;
 
     input {
-        width: 200px;
         text-align: center;
         border: none;
         outline: none;
         font-size: 0.875rem;
+
+        ${({ $width}) => {
+            if($width) {
+                return `
+                    width: ${$width};
+                `
+                }
+            }
+        }
+    }
+
+    input::-webkit-inner-spin-button,
+    input::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
     }
 `
 

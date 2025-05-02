@@ -2,7 +2,7 @@
 import { useState } from 'react'
 import erroImage from '../../assets/erro.png'
 import pencilIcon from '../../assets/lapis.svg'
-import addIcon from '../../assets/maisMenor.svg'
+import addIcon from '../../assets/mais.svg'
 import RoundedButton from '../RoundedButton'
 import { CardContainer, LeftSide, RightSide, RoundedButtonsContainerStyled } from './style'
 
@@ -33,7 +33,7 @@ function Card({ id, title, desc, prazo, vista, quant, img, openModal}) {
                         bgcolor="white-text" 
                         handleClick={() => openModal(modalProduct)} 
                     />
-                    <RoundedButton 
+                    <RoundedButton
                         icon={addIcon} 
                         bgcolor="green" 
                     />
@@ -45,11 +45,11 @@ function Card({ id, title, desc, prazo, vista, quant, img, openModal}) {
                     </li>
                     <li>
                         <h3>à prazo</h3>
-                        <span>R$ {prazo.toFixed(2)}</span>
+                        <span>R$ {prazo.toFixed(2).replace(".", ",")}</span>
                     </li>
                     <li>
                         <h3>à vista</h3>
-                        <span>R$ {prazo.toFixed(2)}</span>
+                        <span>R$ {vista.toFixed(2).replace(".", ",")}</span>
                     </li>
                 </ul>
             </RightSide>

@@ -14,9 +14,26 @@ const AsideBagStyled = styled.aside`
 const AsideHeaderStyled = styled.header`
     display: flex;
     justify-content: space-between;
+
+    span {
+        font-size: 0.875rem;
+        font-weight: 700;
+    }
+`
+
+const ToggleInputContainerStyled = styled.div`
+    margin: 8px 0 24px 0;
+    width: min-content;
+    text-wrap: nowrap;
+
+    label {
+        font-size: 0.875rem;
+        color: var(--gray);
+    }
 `
 
 export {
     AsideBagStyled,
-    AsideHeaderStyled
+    AsideHeaderStyled,
+    ToggleInputContainerStyled
 }

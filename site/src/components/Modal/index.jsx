@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import Button from "../Button"
 import ModalInput from "../ModalInput"
-import ModalQuantity from "../ModalQuantity"
+import QuantityComponent from "../QuantityComponent"
 import { ModalContainer, RowGap, ModalFooter } from "./style"
 import { useState } from "react"
 import Delete from "../Delete"
@@ -21,20 +21,6 @@ function Modal({ modalStage, product }) {
 
     const [openDelete, setOpenDelete] = useState(false);
     const [enablePriceAjust, setEnablePriceAjust] = useState()
-
-    function changeQuant(type) {
-        switch(type) {
-            case 'Mais':
-                setQuant(Number(quant) + 1)
-                break
-            case 'Menos':
-                if(quant <= 0) {
-                    break
-                } else {
-                    setQuant(Number(quant) - 1)
-                }
-        }
-    }
 
     function priceAjust(input) {
         if(!enablePriceAjust) {
@@ -106,7 +92,10 @@ function Modal({ modalStage, product }) {
                 transition={{ duration: 0.3, ease: "easeOut" }}
             >
                 <ModalContainer>
-                    <CloseButton handleClick={() => modalStage(false)} />
+                    <CloseButton 
+                        handleClick={() => modalStage(false)} 
+                        position="top"
+                    />
 
                     <ModalInput 
                         title="Título" 
@@ -151,11 +140,11 @@ function Modal({ modalStage, product }) {
                         handleClick={(enable) => setEnablePriceAjust(enable)}
                     />
                     <ModalFooter>
-                        <ModalQuantity 
-                            inputValue={quant} 
-                            handleType={(value) => setQuant(value)}
-                            handleQuant={(alt) => changeQuant(alt)}
-                            error={quant < 0 || quant === "" ? "O estoque deve ser igual ou maior que 0" : ""}
+                        <QuantityComponent
+                            label="Estoque"
+                            defaultQuantity={quant}
+                            setDefaultQuantity={setQuant}
+                            width="200px"
                         />
                         <RowGap $distance='16px'>
                             {product.titulo !== "" ? <Button bgcolor="red" title="Apagar" handleClick={() => setOpenDelete(true)} /> : null}
