@@ -11,6 +11,7 @@ import { useState } from 'react';
 
 function AsideBag({ asideBagStage, asideBagList, setAsideBagList }) {
     const [priceAjust, setPriceAjust] = useState();
+    const [total, setTotal] = useState(0);
 
     return (
         <>
@@ -48,8 +49,8 @@ function AsideBag({ asideBagStage, asideBagList, setAsideBagList }) {
                                 img={product.foto}
                                 defaultQuantity={product.quantidadeInBag}
 
-                                // Automatizando o preço junto com o switch
-                                price={priceAjust ? product.precoPrazo : product.precoVista}
+                                priceAjust={priceAjust}
+                                attTotal={setTotal}
 
                                 asideBagList={asideBagList}
                                 setAsideBagList={setAsideBagList}
@@ -60,12 +61,13 @@ function AsideBag({ asideBagStage, asideBagList, setAsideBagList }) {
                     <>
                         <TotalContainerStyled>
                             <span>Total:</span>
-                            <strong>R$ 90,00</strong>
+                            <strong>R$ {total.toFixed(2).replace(".", ",")}</strong>
                         </TotalContainerStyled>
                         <Button 
                             title="Concluir"
                             bgcolor="green"
                             largura="completa"
+                            handleClick={() => console.log(asideBagList)}
                         />
                     </>
                 </AsideBagStyled>
