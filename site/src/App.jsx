@@ -20,6 +20,16 @@ function App() {
   const [asideBagOpen, setAsideBagOpen] = useState(false)
   const [asideBagList, setAsideBagList] = useState([])
 
+  function calcBagLength() {
+    let total = 0
+
+    asideBagList.forEach(item => {
+      total += item.quantidadeInBag
+    })
+
+    return total
+  }
+
   // Api
   const [dadosApi, setDadosApi] = useState([])
   useEffect(() => {
@@ -37,6 +47,7 @@ function App() {
         handleModal={(product) => handleOpenModal(product)}
         handleAsideBag={() => setAsideBagOpen(true)}
         produtosNaTela={setDadosApi}
+        asideBagLength={calcBagLength()}
       />
       <MainContainer>
         {dadosApi.map(cadaItem => {

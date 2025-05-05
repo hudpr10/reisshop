@@ -7,7 +7,7 @@ import HeaderInput from '../HeaderInput'
 import RoundedButton from "../RoundedButton"
 import { HeaderContainer, ButtonsContainerStyled } from './style'
 
-function Header({ handleModal, produtosNaTela, handleAsideBag }) {
+function Header({ handleModal, produtosNaTela, handleAsideBag, asideBagLength }) {
     const [modalProduct] = useState({
         titulo: "", 
         descricao: "", 
@@ -33,6 +33,7 @@ function Header({ handleModal, produtosNaTela, handleAsideBag }) {
                     icon={bagIcon}
                     bgcolor="white-text"
                     handleClick={() => handleAsideBag(modalProduct)}
+                    notification={asideBagLength > 0 ? asideBagLength : null} 
                 />
             </ButtonsContainerStyled>
         </HeaderContainer>

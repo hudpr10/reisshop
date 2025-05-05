@@ -56,13 +56,28 @@ const ButtonContainer = styled.button`
         }
     }}
 
+    ${({ $largura }) => {
+        if($largura === "fixa") {
+            return `
+                width: 195px;
+            `
+        } else if($largura === "completa") {
+            return `
+                width: 100%;
+            `
+        } else {
+            return `
+            width: min-content;
+            `
+        }
+    }}
+
     border-radius: 8px;
     border: none;
     display: flex;
     gap: 16px;
     cursor: pointer;
     transition: 200ms;
-    width: ${({ $largura }) => ($largura === "fixa" ? '195px' : 'min-content')};
 
     span {
         font-size: 1rem;

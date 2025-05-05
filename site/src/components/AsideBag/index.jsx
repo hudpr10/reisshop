@@ -3,8 +3,10 @@ import BlackScreen from '../BlackScreen';
 import CardInBag from '../CardInBag';
 import CloseButton from '../CloseButton';
 import ToggleInput from '../ToggleInput';
-import { AsideBagStyled, AsideHeaderStyled, ToggleInputContainerStyled, CardInBagContainerStyled, EmptyMsg } from "./style";
+import { AsideBagStyled, AsideHeaderStyled, ToggleInputContainerStyled, CardInBagContainerStyled, TotalContainerStyled } from "./style";
 import { motion } from "framer-motion";
+import Button from '../Button';
+import { ErrorText } from '../../globalStyles';
 // import errorPng from "../../assets/erro.png";
 
 function AsideBag({ asideBagStage, asideBagList, setAsideBagList }) {
@@ -19,18 +21,21 @@ function AsideBag({ asideBagStage, asideBagList, setAsideBagList }) {
             >
                 <AsideBagStyled>
                     <AsideHeaderStyled>
-                        <span>Sacola de Produtos</span>
-                        <CloseButton 
-                            handleClick={() => asideBagStage(false)}
-                        />
+                        <div>
+                            <span>Sacola de Produtos</span>
+                            <CloseButton 
+                                handleClick={() => asideBagStage(false)}
+                            />
+                        </div>
+
+                        <ToggleInputContainerStyled>
+                            <ToggleInput title="Preço à vista" />
+                        </ToggleInputContainerStyled>
                     </AsideHeaderStyled>
 
-                    <ToggleInputContainerStyled>
-                        <ToggleInput title="Preço à vista" />
-                    </ToggleInputContainerStyled>
 
                     <CardInBagContainerStyled>
-                        {asideBagList.length === 0 ? <EmptyMsg>A sacola está vazia!</EmptyMsg> : null}
+                        {asideBagList.length === 0 ? <ErrorText>A sacola está vazia!</ErrorText> : null}
                         {asideBagList.map((product => {
                             return <CardInBag 
                                 key={product.id}
@@ -45,7 +50,18 @@ function AsideBag({ asideBagStage, asideBagList, setAsideBagList }) {
                             />
                         }))}
                     </CardInBagContainerStyled>
-
+                    
+                    <>
+                        <TotalContainerStyled>
+                            <span>Total:</span>
+                            <strong>R$ 90,00</strong>
+                        </TotalContainerStyled>
+                        <Button 
+                            title="Concluir"
+                            bgcolor="green"
+                            largura="completa"
+                        />
+                    </>
                 </AsideBagStyled>
             </motion.div>
         </>

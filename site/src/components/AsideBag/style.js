@@ -9,11 +9,17 @@ const AsideBagStyled = styled.aside`
     background-color: var(--light-gray);
     width: 390px;
     height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 `
 
 const AsideHeaderStyled = styled.header`
-    display: flex;
-    justify-content: space-between;
+    div {
+        display: flex;
+        justify-content: space-between;
+    }
 
     span {
         font-size: 0.875rem;
@@ -36,13 +42,28 @@ const CardInBagContainerStyled = styled.div`
     display: flex;
     flex-direction: column;
     gap: 16px;
+
+    overflow-y: auto;
+    height: 100%;
 `
 
-const EmptyMsg = styled.p`
-    font-size: 1rem;
-    font-weight: 700;
-    text-align: center;
-    color: var(--gray);
+const TotalContainerStyled = styled.div`
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+
+    margin: 16px 0;
+
+    span {
+        color: var(--gray);
+        font-weight: 700;
+        font-size: 0.875rem;
+    }
+
+    strong {
+        font-size: 1.125rem;
+        font-weight: 700;
+    }
 `
 
 export {
@@ -50,5 +71,5 @@ export {
     AsideHeaderStyled,
     ToggleInputContainerStyled,
     CardInBagContainerStyled,
-    EmptyMsg
+    TotalContainerStyled,
 }
