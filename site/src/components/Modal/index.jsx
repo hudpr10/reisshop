@@ -145,6 +145,7 @@ function Modal({ modalStage, product }) {
                             defaultQuantity={quant}
                             setDefaultQuantity={setQuant}
                             width="200px"
+                            canIncrement={true}
                         />
                         <RowGap $distance='16px'>
                             {product.titulo !== "" ? <Button bgcolor="red" title="Apagar" handleClick={() => setOpenDelete(true)} /> : null}

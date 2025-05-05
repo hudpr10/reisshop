@@ -10,8 +10,8 @@ function CardInBag({ id, title, price, img, defaultQuantity, asideBagList, setAs
 
     useEffect(() => {
         productToUpdate.quantidadeInBag = quantity
-        setAsideBagList([...asideBagList])
 
+        // Tirando item da sacola caso a quantidade for 0
         if(quantity === 0) {
             for(let i = 0; i < asideBagList.length; i++) {
                 if(asideBagList[i].quantidadeInBag === 0) {
@@ -31,7 +31,7 @@ function CardInBag({ id, title, price, img, defaultQuantity, asideBagList, setAs
 
             <TextContainer>
                 <h2>{title}</h2>
-                <span>R$ {price.toFixed(2).replace(".", ",")}</span>
+                <span>R$ {(price*quantity).toFixed(2).replace(".", ",")}</span>
             </TextContainer>
 
             <QuantityContainer>
@@ -39,6 +39,9 @@ function CardInBag({ id, title, price, img, defaultQuantity, asideBagList, setAs
                     width="40px"
                     defaultQuantity={quantity}
                     setDefaultQuantity={setQuantity}
+                    // Testando se é possível adicionar mais itens a sacola
+                    canIncrement={productToUpdate.estoque > quantity}
+                    inputReadOnly={true}
                 />
             </QuantityContainer>
         </CardInBagStyled>

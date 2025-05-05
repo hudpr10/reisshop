@@ -7,9 +7,11 @@ import { AsideBagStyled, AsideHeaderStyled, ToggleInputContainerStyled, CardInBa
 import { motion } from "framer-motion";
 import Button from '../Button';
 import { ErrorText } from '../../globalStyles';
-// import errorPng from "../../assets/erro.png";
+import { useState } from 'react';
 
 function AsideBag({ asideBagStage, asideBagList, setAsideBagList }) {
+    const [priceAjust, setPriceAjust] = useState();
+
     return (
         <>
             <BlackScreen />
@@ -29,10 +31,12 @@ function AsideBag({ asideBagStage, asideBagList, setAsideBagList }) {
                         </div>
 
                         <ToggleInputContainerStyled>
-                            <ToggleInput title="Preço à vista" />
+                            <ToggleInput 
+                                title="Preço à vista" 
+                                handleClick={(enable) => setPriceAjust(enable)}
+                            />
                         </ToggleInputContainerStyled>
                     </AsideHeaderStyled>
-
 
                     <CardInBagContainerStyled>
                         {asideBagList.length === 0 ? <ErrorText>A sacola está vazia!</ErrorText> : null}
@@ -41,9 +45,11 @@ function AsideBag({ asideBagStage, asideBagList, setAsideBagList }) {
                                 key={product.id}
                                 id={product.id}
                                 title={product.titulo}
-                                price={product.precoVista}
                                 img={product.foto}
                                 defaultQuantity={product.quantidadeInBag}
+
+                                // Automatizando o preço junto com o switch
+                                price={priceAjust ? product.precoPrazo : product.precoVista}
 
                                 asideBagList={asideBagList}
                                 setAsideBagList={setAsideBagList}

@@ -27,10 +27,15 @@ function Card({ id, title, desc, prazo, vista, quant, img, openModal, setAsideBa
 
             setAsideBagList([...asideBagList, productObject])
         } else {
-            productInBag.quantidadeInBag += 1
-            
-            setProductObject(productInBag)
-            setAsideBagList([...asideBagList])
+            // Verifica se há estoque antes de adicionar mais produtos na sacola
+            if(productInBag.quantidadeInBag >= productInBag.estoque) {
+                alert("Sem estoque para adicionar esse produto")
+            } else {
+                productInBag.quantidadeInBag += 1
+                
+                setProductObject(productInBag)
+                setAsideBagList([...asideBagList])
+            }
         }
     }
 

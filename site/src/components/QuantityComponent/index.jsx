@@ -4,13 +4,19 @@ import MinusIcon from '../../assets/menos.svg'
 import AddIcon from '../../assets/mais.svg'
 import { InputContainer, QuantityContainer, ErrorMsg } from './style'
 
-function ModalQuantity({ defaultQuantity, setDefaultQuantity, label, width }) {
+function ModalQuantity({ defaultQuantity, setDefaultQuantity, label, width, canIncrement, inputReadOnly=false }) {
     function changeQuantity(type) {
         switch(type) {
             case 'Mais':
-                setDefaultQuantity(Number(defaultQuantity) + 1)
+                // Pode adicionar mais itens a sacola
+                if(canIncrement) {
+                    setDefaultQuantity(Number(defaultQuantity) + 1)
+                } else {
+                    alert("Sem estoque para adicionar esse produto")
+                }
                 break
             case 'Menos':
+                // Pode tirar itens do estoque
                 if(defaultQuantity <= 0) {
                     break
                 } else {
@@ -29,7 +35,8 @@ function ModalQuantity({ defaultQuantity, setDefaultQuantity, label, width }) {
                     alt="Menos" 
                     handleClick={(alt) => changeQuantity(alt)} 
                 />
-                <input 
+                <input
+                    readOnly={inputReadOnly}
                     type="number" 
                     id={label} 
                     value={defaultQuantity} 
