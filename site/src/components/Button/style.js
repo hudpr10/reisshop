@@ -90,6 +90,11 @@ const ButtonContainer = styled.button`
         box-shadow: var(--shadow);
         opacity: 0.7;
     }
+
+    &:disabled {
+        background-color: var(--gray);
+        cursor: not-allowed;
+    }
 `
 
 export {

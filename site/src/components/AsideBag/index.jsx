@@ -68,6 +68,7 @@ function AsideBag({ asideBagStage, asideBagList, setAsideBagList }) {
                             bgcolor="green"
                             largura="completa"
                             handleClick={() => console.log(asideBagList)}
+                            buttonDisable={asideBagList.length === 0}
                         />
                     </>
                 </AsideBagStyled>
