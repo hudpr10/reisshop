@@ -90,10 +90,47 @@ namespace backend.Controllers
                 _context.SaveChanges();
 
                 return Ok("Produto atualizado!");
-            } else
+            } 
+            else
             {
                 return NotFound("Produto não encontrado");
             } 
+        }
+
+        [HttpPatch("/AtualizarVariosProdutos")]
+        public IActionResult UpdateManyData([FromBody] List<ProdutosIdQuant> produtosParaAtualizar)
+        {
+            bool algumProdutoFoiAtualizado = false;
+
+            foreach (ProdutosIdQuant dto in produtosParaAtualizar)
+            {                
+                var produto = _context.Produtos.Find(dto.Id);
+                if(produto != null) {
+                    int newStock = produto.Estoque - dto.Quantidade;
+                    if(newStock < 0) {
+                        return BadRequest("Estoque insuficiente");
+                    }
+
+                    produto.Estoque = newStock;
+                    _context.Produtos.Update(produto);
+
+                    algumProdutoFoiAtualizado = true;
+                }
+                else
+                {
+                    return NotFound("Produto não encontrado");
+                } 
+            }
+
+            if(algumProdutoFoiAtualizado) 
+            {
+                _context.SaveChanges();
+                return Ok("Produtos Atualizados!");
+            }
+            else 
+            {
+                return BadRequest("Ocorreu um erro");
+            }
         }
     }
 }
