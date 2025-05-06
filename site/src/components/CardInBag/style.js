@@ -26,6 +26,13 @@ const TextContainer = styled.div`
     flex-direction: column;
     height: min-content;
 
+    h2 {
+        width: 100%;
+        max-width: 254px;
+        
+        overflow-wrap: break-word;
+    }
+
     h2,
     span {
         font-size: 0.875rem;

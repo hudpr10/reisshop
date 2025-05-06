@@ -30,6 +30,9 @@ const LeftSide = styled.div`
         margin-bottom: 8px;
         color: var(--black);
         width: 100%;
+        max-width: 639px;
+
+        overflow-wrap: break-word;
     }
 
     p {
@@ -37,6 +40,8 @@ const LeftSide = styled.div`
         font-weight: 400;
         color: var(--black);
         width: 100%;
+
+        overflow-wrap: break-word;
     }
 `
 

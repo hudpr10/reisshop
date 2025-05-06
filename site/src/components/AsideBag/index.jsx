@@ -46,7 +46,7 @@ function AsideBag({ asideBagStage, asideBagList, setAsideBagList }) {
                 <AsideBagStyled>
                     <AsideHeaderStyled>
                         <div>
-                            <span>Sacola de Produtos</span>
+                            <h2>Sacola de Produtos</h2>
                             <CloseButton 
                                 handleClick={() => asideBagStage(false)}
                             />

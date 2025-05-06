@@ -9,6 +9,7 @@ const AsideBagStyled = styled.aside`
     background-color: var(--light-gray);
     width: 390px;
     height: 100vh;
+    border-radius: 8px 0 0 8px;
 
     display: flex;
     flex-direction: column;
@@ -21,8 +22,8 @@ const AsideHeaderStyled = styled.header`
         justify-content: space-between;
     }
 
-    span {
-        font-size: 0.875rem;
+    h2 {
+        font-size: 1rem;
         font-weight: 700;
     }
 `
