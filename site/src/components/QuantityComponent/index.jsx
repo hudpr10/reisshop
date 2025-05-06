@@ -11,9 +11,7 @@ function ModalQuantity({ defaultQuantity, setDefaultQuantity, label, width, canI
                 // Pode adicionar mais itens a sacola
                 if(canIncrement) {
                     setDefaultQuantity(Number(defaultQuantity) + 1)
-                } else {
-                    alert("Sem estoque para adicionar esse produto")
-                }
+                } 
                 break
             case 'Menos':
                 // Pode tirar itens do estoque
@@ -46,7 +44,8 @@ function ModalQuantity({ defaultQuantity, setDefaultQuantity, label, width, canI
                     bgcolor="green" 
                     icon={AddIcon} 
                     alt="Mais" 
-                    handleClick={(alt) => changeQuantity(alt)} 
+                    handleClick={(alt) => changeQuantity(alt)}
+                    areDisabled={!canIncrement}
                 />
             </QuantityContainer>
             {defaultQuantity < 0 ? <ErrorMsg>O estoque deve ser maior que 0</ErrorMsg> : null}

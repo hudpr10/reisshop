@@ -17,10 +17,9 @@ function Card({ id, title, desc, prazo, vista, quant, img, openModal, setAsideBa
         estoque: quant,
         quantidadeInBag: 1
     })
-
+    
     function addOnList() {
         const productInBag = asideBagList.find((item) => item.id === id)
-        
         if(productInBag === undefined) {
             productObject.quantidadeInBag = 1
             setProductObject(productObject)
@@ -59,6 +58,7 @@ function Card({ id, title, desc, prazo, vista, quant, img, openModal, setAsideBa
                         icon={addIcon} 
                         bgcolor="green"
                         handleClick={() => addOnList()}
+                        areDisabled={productObject.quantidadeInBag >= productObject.estoque}
                     />
                 </RoundedButtonsContainerStyled>
                 <ul>

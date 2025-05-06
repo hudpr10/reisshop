@@ -1,6 +1,6 @@
 import styled from "styled-components"
 
-const Button = styled.div`
+const Button = styled.button`
     position: relative;
 
     cursor: pointer;
@@ -10,10 +10,16 @@ const Button = styled.div`
     align-items: center;
     border-radius: 50%;
     transition: 200ms;
+    border: none;
 
     &:hover {
         box-shadow: var(--shadow);
         opacity: 0.7;
+    }
+
+    &:disabled {
+        background-color: var(--gray);
+        cursor: not-allowed;
     }
 
     ${({ $bgcolor }) => {
