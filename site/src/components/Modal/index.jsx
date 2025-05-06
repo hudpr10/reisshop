@@ -84,7 +84,9 @@ function Modal({ modalStage, product }) {
 
     return (
         <>
-            <BlackScreen />
+            <BlackScreen 
+                closeOnClick={() => modalStage(false)}
+            />
             <motion.div
                 style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -60%)' }}
                 initial={{ opacity: 0, x: 0 }}

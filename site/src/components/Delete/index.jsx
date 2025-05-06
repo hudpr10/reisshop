@@ -7,7 +7,7 @@ import { motion } from 'framer-motion'
 function Delete({ close, removeProduct }) {
     return (
         <>
-            <BlackScreen />
+            <BlackScreen closeOnClick={() => close()} />
             <motion.div
                 style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}
                 initial={{ opacity: 0 }}

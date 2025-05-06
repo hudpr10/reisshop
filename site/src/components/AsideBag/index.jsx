@@ -36,7 +36,9 @@ function AsideBag({ asideBagStage, asideBagList, setAsideBagList }) {
 
     return (
         <>
-            <BlackScreen />
+            <BlackScreen 
+                closeOnClick={() => asideBagStage()}
+            />
             <motion.div
                 style={{ position: 'absolute', top: 0, right: 0 }}
                 initial={{ opacity: 0, x: 400 }}

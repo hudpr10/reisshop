@@ -15,7 +15,7 @@ function Card({ id, title, desc, prazo, vista, quant, img, openModal, setAsideBa
         precoPrazo: prazo, 
         precoVista: vista, 
         estoque: quant,
-        quantidadeInBag: 1
+        quantidadeInBag: 0
     })
     
     function addOnList() {
