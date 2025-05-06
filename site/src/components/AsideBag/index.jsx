@@ -8,10 +8,31 @@ import { motion } from "framer-motion";
 import Button from '../Button';
 import { ErrorText } from '../../globalStyles';
 import { useState } from 'react';
+import axios from 'axios';
 
 function AsideBag({ asideBagStage, asideBagList, setAsideBagList }) {
     const [priceAjust, setPriceAjust] = useState();
     const [total, setTotal] = useState(0);
+
+    // Função para Atualizar os dados no banco
+    async function atualizaEstoque(lista) {
+        let produtos = []
+
+        // Filtra os dados necessarios para enviar a API
+        lista.map(produto => {
+            produtos.push({
+                id: produto.id,
+                quantidade: produto.quantidadeInBag
+            })
+        })
+
+        try {
+            await axios.patch('http://localhost:5264/AtualizarVariosProdutos', produtos)
+            window.location.reload()
+        } catch (error) {
+            console.error("Erro ao editar: ", error)
+        }
+    }
 
     return (
         <>
@@ -67,7 +88,7 @@ function AsideBag({ asideBagStage, asideBagList, setAsideBagList }) {
                             title="Concluir"
                             bgcolor="green"
                             largura="completa"
-                            handleClick={() => console.log(asideBagList)}
+                            handleClick={() => atualizaEstoque(asideBagList)}
                             buttonDisable={asideBagList.length === 0}
                         />
                     </>
