@@ -25,8 +25,6 @@ const MainStyled = createGlobalStyle`
         background-color: var(--light-gray);
         max-width: 1100px;
         margin: 0 auto;
-
-        overflow-x: hidden;
     }
 `
 

@@ -44,8 +44,24 @@ const CardInBagContainerStyled = styled.div`
     flex-direction: column;
     gap: 16px;
 
-    overflow-y: auto;
+    padding-right: 4px;
+    overflow-y: scroll;
     height: 100%;
+
+    // Customizando ScrollBar
+    &::-webkit-scrollbar {
+        width: 8px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background-color: var(--light-gray);
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: var(--gray);
+        border-radius: 8px;
+        border: 2px solid var(--light-gray);
+    }
 `
 
 const TotalContainerStyled = styled.div`

@@ -26,7 +26,7 @@ const TextContainer = styled.div`
     flex-direction: column;
     justify-content: space-between;
     width: 100%;
-    max-width: 153px;
+    max-width: 156px;
 
     h2 {
         overflow-wrap: break-word;
