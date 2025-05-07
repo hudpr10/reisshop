@@ -2,7 +2,7 @@
 /* eslint-disable react/prop-types */
 import { useEffect, useState } from 'react';
 import QuantityComponent from '../QuantityComponent';
-import { CardInBagStyled, ImgContainer, TextContainer, QuantityContainer } from './style';
+import { CardInBagStyled, ImgContainer, TextContainer, ActionsContainer, RemoveButton } from './style';
 import erroImage from '../../assets/erro.png';
 
 function CardInBag({ id, title, priceAjust, img, defaultQuantity, asideBagList, setAsideBagList, attTotal }) {
@@ -48,16 +48,18 @@ function CardInBag({ id, title, priceAjust, img, defaultQuantity, asideBagList, 
                 <span>R$ {(price*quantity).toFixed(2).replace(".", ",")}</span>
             </TextContainer>
 
-            <QuantityContainer>
-                <QuantityComponent 
-                    width="40px"
+            <ActionsContainer>
+                <RemoveButton onClick={() => setQuantity(0)}>Remover</RemoveButton>
+                <QuantityComponent
+                    padding="4px"
+                    width="30px"
                     defaultQuantity={quantity}
                     setDefaultQuantity={setQuantity}
                     // Testando se é possível adicionar mais itens a sacola
                     canIncrement={productToUpdate.estoque > quantity}
                     inputReadOnly={true}
                 />
-            </QuantityContainer>
+            </ActionsContainer>
         </CardInBagStyled>
     )
 }

@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import { Button, ImgStyled, NotificationStyled } from "./style"
 
-function RoundedButton({ alt, bgcolor, icon, handleClick, notification, areDisabled=false }) {
+function RoundedButton({ alt, bgcolor, icon, handleClick, notification, areDisabled=false, padding='8px' }) {
     return (
         <Button 
             $bgcolor={bgcolor} 
@@ -11,6 +11,7 @@ function RoundedButton({ alt, bgcolor, icon, handleClick, notification, areDisab
             <ImgStyled 
                 src={icon} 
                 alt={alt} 
+                $imgPadding={padding}
             />
             {notification ? <NotificationStyled>{notification}</NotificationStyled> : null}
         </Button>

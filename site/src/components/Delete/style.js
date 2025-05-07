@@ -1,6 +1,8 @@
 import styled from "styled-components";
 
 const AreUSure = styled.div`
+    position: fixed;
+
     display: flex;
     flex-direction: column;
     gap: 24px;
@@ -10,7 +12,6 @@ const AreUSure = styled.div`
     width: 400px;
     border-radius: 8px;
     align-items: flex-end;
-    position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);

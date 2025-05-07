@@ -88,7 +88,7 @@ function Modal({ modalStage, product }) {
                 closeOnClick={() => modalStage(false)}
             />
             <motion.div
-                style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -60%)' }}
+                style={{ position: 'fixed', top: '50%', left: '50%', transform: 'translate(-50%, -60%)' }}
                 initial={{ opacity: 0, x: 0 }}
                 animate={{ opacity: 1, x: 0}}
                 transition={{ duration: 0.3, ease: "easeOut" }}

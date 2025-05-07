@@ -22,24 +22,11 @@ const Button = styled.button`
         cursor: not-allowed;
     }
 
-    ${({ $bgcolor }) => {
-        if ($bgcolor === 'green')
-            return `
-                background-color: var(--green);
-            `
-        else if ($bgcolor === 'red')
-            return `
-                background-color: var(--red);
-            `
-        else if ($bgcolor === 'white-text')
-            return `
-                background-color: var(--white-text)
-            `
-    }}
+    background-color: ${({ $bgcolor }) => 'var(--' + $bgcolor + ')'};
 `
 
 const ImgStyled = styled.img`
-    padding: 8px;
+    padding: ${({ $imgPadding }) => $imgPadding };
 `
 
 const NotificationStyled = styled.span`

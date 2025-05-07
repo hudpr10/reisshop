@@ -12,11 +12,11 @@ const CardInBagStyled = styled.div`
 
 const ImgContainer = styled.div`
     height: 64px;
-
+    
     img {
         width: 64px;
         height: 64px;
-        object-fit: cover;
+        object-fit: contain;
         border-radius: 4px;
     }
 `
@@ -24,12 +24,11 @@ const ImgContainer = styled.div`
 const TextContainer = styled.div`
     display: flex;
     flex-direction: column;
-    height: min-content;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 153px;
 
     h2 {
-        width: 100%;
-        max-width: 254px;
-        
         overflow-wrap: break-word;
     }
 
@@ -40,15 +39,32 @@ const TextContainer = styled.div`
     }
 `
 
-const QuantityContainer = styled.div`
-    position: absolute;
-    right: 8px;
-    bottom: 8px;
+const ActionsContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+`
+
+const RemoveButton = styled.button`
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    text-align: end;
+    font-size: 0.75rem;
+    text-decoration: underline;
+
+    color: var(--gray);
+    transition: 200ms;
+
+    &:hover {
+        opacity: 0.7;
+    }
 `
 
 export {
     CardInBagStyled,
     ImgContainer,
     TextContainer,
-    QuantityContainer
+    ActionsContainer,
+    RemoveButton
 }

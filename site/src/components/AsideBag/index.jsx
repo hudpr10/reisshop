@@ -40,7 +40,7 @@ function AsideBag({ asideBagStage, asideBagList, setAsideBagList }) {
                 closeOnClick={() => asideBagStage()}
             />
             <motion.div
-                style={{ position: 'absolute', top: 0, right: 0 }}
+                style={{ position: 'fixed', top: 0, right: 0 }}
                 initial={{ opacity: 0, x: 400 }}
                 animate={{ opacity: 1, x: 0}}
                 transition={{ duration: 0.3, ease: "easeOut" }}

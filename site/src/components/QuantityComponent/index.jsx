@@ -4,7 +4,7 @@ import MinusIcon from '../../assets/menos.svg'
 import AddIcon from '../../assets/mais.svg'
 import { InputContainer, QuantityContainer, ErrorMsg } from './style'
 
-function ModalQuantity({ defaultQuantity, setDefaultQuantity, label, width, canIncrement, inputReadOnly=false }) {
+function ModalQuantity({ defaultQuantity, setDefaultQuantity, label, width, canIncrement, inputReadOnly=false, padding }) {
     function changeQuantity(type) {
         switch(type) {
             case 'Mais':
@@ -27,7 +27,8 @@ function ModalQuantity({ defaultQuantity, setDefaultQuantity, label, width, canI
         <InputContainer>
             {label !== "" ? <label htmlFor={label}>{label}</label> : null}
             <QuantityContainer $width={width}>
-                <RoundedButton 
+                <RoundedButton
+                    padding={padding}
                     bgcolor="red" 
                     icon={MinusIcon} 
                     alt="Menos" 
@@ -40,7 +41,8 @@ function ModalQuantity({ defaultQuantity, setDefaultQuantity, label, width, canI
                     value={defaultQuantity} 
                     onChange={(e) => setDefaultQuantity(e.target.value)}
                 />
-                <RoundedButton 
+                <RoundedButton
+                    padding={padding}
                     bgcolor="green" 
                     icon={AddIcon} 
                     alt="Mais" 
