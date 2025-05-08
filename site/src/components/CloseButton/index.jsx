@@ -4,7 +4,7 @@ import closeIcon from '../../assets/fechar.svg'
 
 function CloseButton({ handleClick, position }) {
     return (
-        <CloseButtonStyled onClick={() => handleClick()} $position={position}> 
+        <CloseButtonStyled onClick={(e) => {e.stopPropagation(); handleClick()}} $position={position}> 
             <img src={closeIcon} alt="Fechar" />
         </CloseButtonStyled>
     )

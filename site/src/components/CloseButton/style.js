@@ -2,14 +2,16 @@ import styled from "styled-components";
 
 const CloseButtonStyled = styled.button`
     border: none;
-    background-color: #d9d9d9;
     display: flex;
+    background-color: transparent;
     justify-content: center;
     align-items: center;
     width: min-content;
     border-radius: 50%;
     padding: 4px;
     cursor: pointer;
+
+    transition: 200ms;
 
     ${({ $position }) => {
         if($position === 'top') {
@@ -20,6 +22,10 @@ const CloseButtonStyled = styled.button`
             `
         }
     }}
+
+    &:hover {
+        opacity: 0.7;
+    }
 `
 
 export {

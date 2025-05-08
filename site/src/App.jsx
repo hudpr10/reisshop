@@ -5,6 +5,7 @@ import { MainContainer, ErrorText } from './globalStyles'
 import Card from './components/Card'
 import axios from 'axios'
 import AsideBag from './components/AsideBag'
+import NotificationToast from './components/NotificationToast'
 
 function App() {
   // Modal
@@ -29,6 +30,9 @@ function App() {
 
     return total
   }
+
+  // Funções do Toast
+  const [toastOpen, setToastOpen] = useState("")
 
   // Api
   const [dadosApi, setDadosApi] = useState([])
@@ -64,13 +68,39 @@ function App() {
             asideBagList={asideBagList}
             setAsideBagList={setAsideBagList}
 
+            setToastOpen={setToastOpen}
+
             openModal={(product) => handleOpenModal(product)}
           />
         })}
         {dadosApi.length === 0 ? <ErrorText>Não foi encontrado nenhum produto!</ErrorText> : null}
-        {modalOpen ? <Modal modalStage={setModalOpen} product={modalProduct} /> : null}
-        {asideBagOpen ? <AsideBag asideBagStage={setAsideBagOpen} asideBagList={asideBagList} setAsideBagList={setAsideBagList} /> : null}
+
+        {modalOpen 
+          ? <Modal 
+              modalStage={setModalOpen} 
+              product={modalProduct} 
+            /> 
+          : null
+        }
+
+        {asideBagOpen 
+          ? <AsideBag 
+              asideBagStage={setAsideBagOpen} 
+              asideBagList={asideBagList} 
+              setAsideBagList={setAsideBagList} 
+            /> 
+          : null
+        }
       </MainContainer>
+      
+      {toastOpen != "" 
+        ? <NotificationToast 
+            productName={toastOpen} 
+            setToastOpen={setToastOpen} 
+            setAsideBagOpen={setAsideBagOpen} 
+          /> 
+        : null 
+      }
     </>
   )
 }
