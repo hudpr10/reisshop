@@ -45,6 +45,11 @@ const LeftSide = styled.div`
 
     p {
         font-size: 0.875rem;
+        max-width: 233px;
+        
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
     }
 `
 

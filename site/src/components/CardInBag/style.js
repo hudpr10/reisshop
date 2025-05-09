@@ -30,6 +30,9 @@ const TextContainer = styled.div`
 
     h2 {
         overflow-wrap: break-word;
+        overflow: hidden;
+
+        max-height: 34px;
     }
 
     h2,
