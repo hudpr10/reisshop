@@ -6,8 +6,8 @@ const ToastStyled = styled.div`
     cursor: pointer;
 
     position: fixed;
-    right: 24px;
-    bottom: 24px;
+    right: 36px;
+    bottom: 36px;
 
     display: flex;
     justify-content: space-between;

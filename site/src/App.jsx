@@ -31,8 +31,8 @@ function App() {
     return total
   }
 
-  // Funções do Toast
-  const [toastOpen, setToastOpen] = useState("")
+  // Toast
+  const [toastObject, setToastObject] = useState({ name: "", open: false })
 
   // Api
   const [dadosApi, setDadosApi] = useState([])
@@ -47,7 +47,7 @@ function App() {
 
   return (
     <>
-      <Header 
+      <Header
         handleModal={(product) => handleOpenModal(product)}
         handleAsideBag={() => setAsideBagOpen(true)}
         produtosNaTela={setDadosApi}
@@ -68,39 +68,32 @@ function App() {
             asideBagList={asideBagList}
             setAsideBagList={setAsideBagList}
 
-            setToastOpen={setToastOpen}
+            setToastObject={setToastObject}
 
             openModal={(product) => handleOpenModal(product)}
           />
         })}
         {dadosApi.length === 0 ? <ErrorText>Não foi encontrado nenhum produto!</ErrorText> : null}
-
-        {modalOpen 
-          ? <Modal 
-              modalStage={setModalOpen} 
-              product={modalProduct} 
-            /> 
-          : null
-        }
-
-        {asideBagOpen 
-          ? <AsideBag 
-              asideBagStage={setAsideBagOpen} 
-              asideBagList={asideBagList} 
-              setAsideBagList={setAsideBagList} 
-            /> 
-          : null
-        }
       </MainContainer>
-      
-      {toastOpen != "" 
-        ? <NotificationToast 
-            productName={toastOpen} 
-            setToastOpen={setToastOpen} 
-            setAsideBagOpen={setAsideBagOpen} 
-          /> 
-        : null 
+
+      {modalOpen 
+        ? <Modal setModalOpen={setModalOpen} product={modalProduct} />
+        : null
       }
+
+      <AsideBag
+        asideBagOpen={asideBagOpen}
+        setAsideBagOpen={setAsideBagOpen}
+
+        asideBagList={asideBagList}
+        setAsideBagList={setAsideBagList}
+      />
+
+      <NotificationToast
+        toastObject={toastObject}
+        setToastObject={setToastObject}
+        setAsideBagOpen={setAsideBagOpen}
+      />
     </>
   )
 }

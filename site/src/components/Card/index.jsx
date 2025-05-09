@@ -6,7 +6,7 @@ import addIcon from '../../assets/mais.svg'
 import RoundedButton from '../RoundedButton'
 import { CardContainer, LeftSide, RightSide, RoundedButtonsContainerStyled } from './style'
 
-function Card({ id, title, desc, prazo, vista, quant, img, openModal, setAsideBagList, asideBagList, setToastOpen }) {
+function Card({ id, title, desc, prazo, vista, quant, img, openModal, setAsideBagList, asideBagList, setToastObject }) {
     const [productObject, setProductObject] = useState({
         id: id,
         titulo: title, 
@@ -21,8 +21,10 @@ function Card({ id, title, desc, prazo, vista, quant, img, openModal, setAsideBa
     function addOnList() {
         const productInBag = asideBagList.find((item) => item.id === id)
 
-        // Cria o Toast
-        setToastOpen(title)
+        setToastObject(() => ({
+            name: title,
+            open: true,
+        }))
 
         if(productInBag === undefined) {
             productObject.quantidadeInBag = 1

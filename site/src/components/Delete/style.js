@@ -8,13 +8,14 @@ const AreUSure = styled.div`
     gap: 24px;
     background-color: var(--light-gray);
     padding: 24px;
-    z-index: 1;
     width: 400px;
     border-radius: 8px;
     align-items: flex-end;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+
+    z-index: 2;
 
     div {
         display: flex;

@@ -14,14 +14,13 @@ function Delete({ close, removeProduct }) {
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.3, ease: "easeOut" }}
             >
-
                 <AreUSure>
                     <h2>Tem certeza que quer apagar esse produto?</h2>
                     <div>
                         <Button title="Cancelar" handleClick={() => close()} />
                         <Button title="Apagar" bgcolor="red" handleClick={() => removeProduct()} />
                     </div>
-                </AreUSure>
+                </AreUSure> 
             </motion.div>
         </>
     )

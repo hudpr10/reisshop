@@ -11,7 +11,7 @@ import axios from "axios"
 import { motion } from "framer-motion";
 import BlackScreen from "../BlackScreen"
 
-function Modal({ modalStage, product }) {
+function Modal({ setModalOpen, product }) {
     const [title, setTitle] = useState(product.titulo)
     const [desc, setDesc] = useState(product.descricao)
     const [image, setImage] = useState(product.foto)
@@ -23,17 +23,17 @@ function Modal({ modalStage, product }) {
     const [enablePriceAjust, setEnablePriceAjust] = useState()
 
     function priceAjust(input) {
-        if(!enablePriceAjust) {
-            if(input === "prazo") {
+        if (!enablePriceAjust) {
+            if (input === "prazo") {
                 setPriceVista(Number(pricePrazo) - (pricePrazo * 0.1))
-            } else if(input === "vista") {
+            } else if (input === "vista") {
                 setPricePrazo(Number(priceVista) + (priceVista * 0.1))
             }
         }
     }
 
     async function validInputs(buttonName) {
-        if(title !== "" && desc !== "" && pricePrazo !== "" && priceVista !== "" && quant >= 0 && quant !== "") {
+        if (title !== "" && desc !== "" && pricePrazo !== "" && priceVista !== "" && quant >= 0 && quant !== "") {
             let produtoNovo = {
                 titulo: title,
                 descricao: desc,
@@ -43,16 +43,16 @@ function Modal({ modalStage, product }) {
                 estoque: quant
             }
 
-            if(buttonName === 'Adicionar') {
+            if (buttonName === 'Adicionar') {
                 postProduto(produtoNovo)
-            } else if(buttonName === 'Salvar') {
+            } else if (buttonName === 'Salvar') {
                 produtoNovo = {
                     ...produtoNovo,
                     id: product.id
                 }
                 patchProduto(produtoNovo)
             }
-        } 
+        }
     }
 
     async function postProduto(produto) {
@@ -84,61 +84,59 @@ function Modal({ modalStage, product }) {
 
     return (
         <>
-            <BlackScreen 
-                closeOnClick={() => modalStage(false)}
-            />
+            <BlackScreen closeOnClick={() => setModalOpen(false)} />
             <motion.div
                 style={{ position: 'fixed', top: '50%', left: '50%', transform: 'translate(-50%, -60%)' }}
-                initial={{ opacity: 0, x: 0 }}
-                animate={{ opacity: 1, x: 0}}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
                 transition={{ duration: 0.3, ease: "easeOut" }}
             >
                 <ModalContainer>
-                    <CloseButton 
-                        handleClick={() => modalStage(false)} 
+                    <CloseButton
+                        handleClick={() => setModalOpen(false)}
                         position="top"
                     />
 
-                    <ModalInput 
-                        title="Título" 
-                        inputValue={title} 
-                        handleType={(value) => setTitle(value)} 
+                    <ModalInput
+                        title="Título"
+                        inputValue={title}
+                        handleType={(value) => setTitle(value)}
                         handleBlur={() => null}
-                        error={title === ""? "Digite o nome do produto" : ""}
+                        error={title === "" ? "Digite o nome do produto" : ""}
                     />
-                    <ModalInput 
-                        title="Descrição" 
-                        inputValue={desc} 
-                        handleType={(value) => setDesc(value)} 
+                    <ModalInput
+                        title="Descrição"
+                        inputValue={desc}
+                        handleType={(value) => setDesc(value)}
                         handleBlur={() => null}
                         error={desc === "" ? "Digite as características do produto" : ""}
                     />
-                    <ModalInput 
-                        title="Foto" 
-                        inputValue={image} 
-                        handleType={(value) => setImage(value)} 
+                    <ModalInput
+                        title="Foto"
+                        inputValue={image}
+                        handleType={(value) => setImage(value)}
                         handleBlur={() => null}
                     />
                     <RowGap $distance='24px'>
-                        <ModalInput 
+                        <ModalInput
                             type="number"
-                            title="Preço à prazo" 
-                            inputValue={pricePrazo} 
+                            title="Preço à prazo"
+                            inputValue={pricePrazo}
                             handleType={(value) => setPricePrazo(value)}
                             handleBlur={() => priceAjust('prazo')}
                             error={pricePrazo <= 0 ? 'Digite o preço à prazo' : ''}
                         />
-                        <ModalInput 
+                        <ModalInput
                             type="number"
-                            title="Preço à vista" 
-                            inputValue={priceVista} 
+                            title="Preço à vista"
+                            inputValue={priceVista}
                             handleType={(value) => setPriceVista(value)}
                             handleBlur={() => priceAjust('vista')}
                             error={priceVista <= 0 ? 'Digite o preço à vista' : ''}
                         />
                     </RowGap>
-                    <ToggleInput 
-                        title="Ajustar preços automaticamente" 
+                    <ToggleInput
+                        title="Ajustar preços automaticamente"
                         handleClick={(enable) => setEnablePriceAjust(enable)}
                     />
                     <ModalFooter>
@@ -151,23 +149,22 @@ function Modal({ modalStage, product }) {
                         />
                         <RowGap $distance='16px'>
                             {product.titulo !== "" ? <Button bgcolor="red" title="Apagar" handleClick={() => setOpenDelete(true)} /> : null}
-                            <Button title="Cancelar" handleClick={() => modalStage(false)} />
-                            {product.titulo === "" 
-                                ? <Button title="Adicionar" bgcolor="green" handleClick={() => validInputs('Adicionar')} /> 
+                            <Button title="Cancelar" handleClick={() => setModalOpen(false)} />
+                            {product.titulo === ""
+                                ? <Button title="Adicionar" bgcolor="green" handleClick={() => validInputs('Adicionar')} />
                                 : <Button title="Salvar" bgcolor="green" handleClick={() => validInputs('Salvar')} />
                             }
                         </RowGap>
                     </ModalFooter>
-                </ModalContainer>
-                {openDelete 
-                    ? <Delete 
-                        close={() => setOpenDelete(false)} 
-                        removeProduct={() => deleteProduto(product.id)} 
-                    /> 
-                    : null
-                }
+                </ModalContainer>                
             </motion.div>
+            
+            {openDelete 
+                ? <Delete close={() => setOpenDelete(false)} removeProduct={() => deleteProduto(product.id)} />
+                : null
+            }
         </>
+
     )
 }
 
