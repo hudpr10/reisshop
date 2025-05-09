@@ -6,6 +6,7 @@ import Card from './components/Card'
 import axios from 'axios'
 import AsideBag from './components/AsideBag'
 import NotificationToast from './components/NotificationToast'
+import { AnimatePresence } from 'framer-motion'
 
 function App() {
   // Modal
@@ -49,9 +50,10 @@ function App() {
     <>
       <Header
         handleModal={(product) => handleOpenModal(product)}
-        handleAsideBag={() => setAsideBagOpen(true)}
         produtosNaTela={setDadosApi}
+        setAsideBagOpen={() => setAsideBagOpen(true)}
         asideBagLength={calcBagLength()}
+        setToastObject={setToastObject}
       />
       <MainContainer>
         {dadosApi.map(cadaItem => {
@@ -76,24 +78,26 @@ function App() {
         {dadosApi.length === 0 ? <ErrorText>Não foi encontrado nenhum produto!</ErrorText> : null}
       </MainContainer>
 
-      {modalOpen 
-        ? <Modal setModalOpen={setModalOpen} product={modalProduct} />
-        : null
-      }
+      {/* Adicionado animação na Modal */}
+      <AnimatePresence>
+        {modalOpen && (
+          <Modal setModalOpen={setModalOpen} product={modalProduct} />
+        )}
+      </AnimatePresence>
 
-      <AsideBag
-        asideBagOpen={asideBagOpen}
-        setAsideBagOpen={setAsideBagOpen}
+      {/* Adicionado animação na Sacola */}
+      <AnimatePresence>
+        {asideBagOpen && (
+          <AsideBag setAsideBagOpen={setAsideBagOpen} asideBagList={asideBagList} setAsideBagList={setAsideBagList} />
+        )}
+      </AnimatePresence>
 
-        asideBagList={asideBagList}
-        setAsideBagList={setAsideBagList}
-      />
-
-      <NotificationToast
-        toastObject={toastObject}
-        setToastObject={setToastObject}
-        setAsideBagOpen={setAsideBagOpen}
-      />
+      {/* Adicionado animação no Toast */}
+      <AnimatePresence>
+        {toastObject.open && (
+          <NotificationToast toastObject={toastObject} setToastObject={setToastObject} setAsideBagOpen={setAsideBagOpen} />
+        )}
+      </AnimatePresence>
     </>
   )
 }

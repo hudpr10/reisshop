@@ -90,6 +90,7 @@ function Modal({ setModalOpen, product }) {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.3, ease: "easeOut" }}
+                exit={{ opacity: 0}}
             >
                 <ModalContainer>
                     <CloseButton
@@ -159,12 +160,8 @@ function Modal({ setModalOpen, product }) {
                 </ModalContainer>                
             </motion.div>
             
-            {openDelete 
-                ? <Delete close={() => setOpenDelete(false)} removeProduct={() => deleteProduto(product.id)} />
-                : null
-            }
+            <Delete openDelete={openDelete} close={() => setOpenDelete(false)} removeProduct={() => deleteProduto(product.id)} />
         </>
-
     )
 }
 

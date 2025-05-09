@@ -11,7 +11,7 @@ using backend.Context;
 namespace backend.Migrations
 {
     [DbContext(typeof(ProdutosContext))]
-    [Migration("20250429172937_CriandoTabelaProdutos")]
+    [Migration("20250509175234_CriandoTabelaProdutos")]
     partial class CriandoTabelaProdutos
     {
         /// <inheritdoc />

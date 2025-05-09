@@ -7,7 +7,7 @@ const BlackScreenStyled = styled.div`
     left: 0;
     bottom: 0;
     right: 0;
-    opacity: 0.4;
+    opacity: 0.6;
 `
 
 export {

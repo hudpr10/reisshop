@@ -4,13 +4,13 @@ import CardInBag from '../CardInBag';
 import CloseButton from '../CloseButton';
 import ToggleInput from '../ToggleInput';
 import { AsideBagStyled, AsideHeaderStyled, ToggleInputContainerStyled, CardInBagContainerStyled, TotalContainerStyled } from "./style";
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import Button from '../Button';
 import { ErrorText } from '../../globalStyles';
 import { useState } from 'react';
 import axios from 'axios';
 
-function AsideBag({ asideBagOpen, setAsideBagOpen, asideBagList, setAsideBagList }) {
+function AsideBag({ setAsideBagOpen, asideBagList, setAsideBagList }) {
     const [priceAjust, setPriceAjust] = useState();
     const [total, setTotal] = useState(0);
 
@@ -35,73 +35,69 @@ function AsideBag({ asideBagOpen, setAsideBagOpen, asideBagList, setAsideBagList
     }
 
     return (
-        <AnimatePresence>
-            {asideBagOpen && (
-                <>
-                    <BlackScreen
-                        closeOnClick={() => setAsideBagOpen()}
-                    />
-                    <motion.div
-                        style={{ position: 'fixed', top: 0, right: 0 }}
-                        initial={{ opacity: 1, x: 400 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        exit={{ opacity: 0, x: 400 }}
-                        transition={{ duration: 0.3, ease: "easeOut" }}
-                    >
-                        <AsideBagStyled>
-                            <AsideHeaderStyled>
-                                <div>
-                                    <h2>Sacola de Produtos</h2>
-                                    <CloseButton
-                                        handleClick={() => setAsideBagOpen(false)}
-                                    />
-                                </div>
+        <>
+            <BlackScreen
+                closeOnClick={() => setAsideBagOpen()}
+            />
+            <motion.div
+                style={{ position: 'fixed', top: 0, right: 0 }}
+                initial={{ opacity: 1, x: 400 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: 400 }}
+                transition={{ duration: 0.3, ease: "easeOut" }}
+            >
+                <AsideBagStyled>
+                    <AsideHeaderStyled>
+                        <div>
+                            <h2>Sacola de Produtos</h2>
+                            <CloseButton
+                                handleClick={() => setAsideBagOpen(false)}
+                            />
+                        </div>
 
-                                <ToggleInputContainerStyled>
-                                    <ToggleInput
-                                        title="Preço à vista"
-                                        handleClick={(enable) => setPriceAjust(enable)}
-                                    />
-                                </ToggleInputContainerStyled>
-                            </AsideHeaderStyled>
+                        <ToggleInputContainerStyled>
+                            <ToggleInput
+                                title="Preço à vista"
+                                handleClick={(enable) => setPriceAjust(enable)}
+                            />
+                        </ToggleInputContainerStyled>
+                    </AsideHeaderStyled>
 
-                            <CardInBagContainerStyled>
-                                {asideBagList.length === 0 ? <ErrorText>A sacola está vazia!</ErrorText> : null}
-                                {asideBagList.map((product => {
-                                    return <CardInBag
-                                        key={product.id}
-                                        id={product.id}
-                                        title={product.titulo}
-                                        img={product.foto}
-                                        defaultQuantity={product.quantidadeInBag}
+                    <CardInBagContainerStyled>
+                        {asideBagList.length === 0 ? <ErrorText>A sacola está vazia!</ErrorText> : null}
+                        {asideBagList.map((product => {
+                            return <CardInBag
+                                key={product.id}
+                                id={product.id}
+                                title={product.titulo}
+                                img={product.foto}
+                                defaultQuantity={product.quantidadeInBag}
 
-                                        priceAjust={priceAjust}
-                                        attTotal={setTotal}
+                                priceAjust={priceAjust}
+                                attTotal={setTotal}
 
-                                        asideBagList={asideBagList}
-                                        setAsideBagList={setAsideBagList}
-                                    />
-                                }))}
-                            </CardInBagContainerStyled>
+                                asideBagList={asideBagList}
+                                setAsideBagList={setAsideBagList}
+                            />
+                        }))}
+                    </CardInBagContainerStyled>
 
-                            <>
-                                <TotalContainerStyled>
-                                    <span>Total:</span>
-                                    <strong>R$ {total.toFixed(2).replace(".", ",")}</strong>
-                                </TotalContainerStyled>
-                                <Button
-                                    title="Concluir"
-                                    bgcolor="green"
-                                    largura="completa"
-                                    handleClick={() => atualizaEstoque(asideBagList)}
-                                    buttonDisable={asideBagList.length === 0}
-                                />
-                            </>
-                        </AsideBagStyled>
-                    </motion.div>
-                </>
-            )}
-        </AnimatePresence>
+                    <>
+                        <TotalContainerStyled>
+                            <span>Total:</span>
+                            <strong>R$ {total.toFixed(2).replace(".", ",")}</strong>
+                        </TotalContainerStyled>
+                        <Button
+                            title="Concluir"
+                            bgcolor="green"
+                            largura="completa"
+                            handleClick={() => atualizaEstoque(asideBagList)}
+                            buttonDisable={asideBagList.length === 0}
+                        />
+                    </>
+                </AsideBagStyled>
+            </motion.div>
+        </>
     )
 }
 
